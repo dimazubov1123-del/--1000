@@ -137,8 +137,8 @@
 <article class="panel"><h2>СОСТОЯНИЕ ПОДСИСТЕМ</h2><div class="body"><div class="status"><span><i class="dot"></i>Мнемосхема блока</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Циркуляционная модель</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №1</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №2</span><b>НОРМА</b></div><div class="status"><span><i class="dot amber"></i>Историческая справка</span><b>ДОСТУПНА</b></div></div></article>
 
 <article class="panel full"><h2>ЗВУКОВАЯ СРЕДА БЩУ · УЧЕБНАЯ АУДИОСИСТЕМА</h2><div class="body"><div class="audio-grid">
-<div class="audio-card"><h3>АТМОСФЕРА ПОМЕЩЕНИЯ</h3><div class="audio-state"><i class="audio-led" id="ambientLed"></i><span id="audioState">Звук выключен</span></div><p>Низкий фоновый гул, вентиляционный шум и редкие негромкие щелчки аппаратуры.</p><div class="audio-actions"><button class="primary" id="audioStart">Включить звук</button><button id="audioStop">Остановить</button></div></div>
-<div class="audio-card"><h3>УЧЕБНЫЕ СИГНАЛЫ</h3><p>Отдельные звуковые обозначения для сообщений, предупреждений и условной тревоги.</p><div class="audio-actions"><button id="testInfo">Сообщение</button><button class="warnbtn" id="testWarning">Предупреждение</button><button class="warnbtn" id="testAlarm">Тревога</button><button id="stopAlarm">Стоп сигнала</button></div></div>
+<div class="audio-card"><h3>АТМОСФЕРА ПОМЕЩЕНИЯ</h3><div class="audio-state"><i class="audio-led" id="ambientLed"></i><span id="audioState">Звук выключен</span></div><p>Синтезированная акустическая стилизация: сетевой гул, вентиляция, редкие механические щелчки. Не архивная запись.</p><div class="audio-actions"><button class="primary" id="audioStart">Включить звук</button><button id="audioStop">Остановить</button></div></div>
+<div class="audio-card"><h3>УЧЕБНЫЕ СИГНАЛЫ</h3><p>Три разных учебных звуковых эффекта. Их тембры не выдаются за подлинную сигнализацию БЩУ-4.</p><div class="audio-actions"><button id="testInfo">Сообщение</button><button class="warnbtn" id="testWarning">Предупреждение</button><button class="warnbtn" id="testAlarm">Тревога</button><button id="stopAlarm">Стоп сигнала</button></div></div>
 <div class="audio-card"><h3>МИКШЕР ГРОМКОСТИ</h3><div class="audio-row"><label for="ambVol">Фоновая атмосфера</label><span id="ambVal">35%</span></div><input id="ambVol" type="range" min="0" max="100" value="35" aria-label="Громкость фоновой атмосферы"><div class="audio-row"><label for="sigVol">Сигналы и тревоги</label><span id="sigVal">65%</span></div><input id="sigVol" type="range" min="0" max="100" value="65" aria-label="Громкость сигналов и тревог"><div class="audio-note">Звук формируется браузером. Для воспроизведения требуется включить аудиосистему.</div></div>
 </div></div></article>
 
@@ -262,81 +262,140 @@ el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых учебны
 el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('ЗАПИСЬ ОПЕРАТОРА: '+t);el('note').value=''};
 </script>
 <script>
-/* Учебная аудиосистема: синтезированные атмосферные эффекты, не копия штатной сигнализации. */
+/* Акустическая стилизация помещения: синтез Web Audio, не архивная запись ЧАЭС. */
 (()=>{
- let ctx=null,master=null,ambBus=null,sigBus=null,ambNodes=[],noiseNode=null,alarmTimers=[],relayTimer=null,alarmActive=false,started=false;
+ let ctx=null,master=null,ambBus=null,sigBus=null,started=false,alarmActive=false;
+ let ambientNodes=[],timers=[],relayTimer=null,alarmTimer=null;
  const $=id=>document.getElementById(id);
- const clamp=n=>Math.max(0,Math.min(1,n));
- function setState(t,mode){$('audioState').textContent=t;$('ambientLed').className='audio-led'+(mode==='on'?' on':mode==='alert'?' alert':'')}
+ const clamp=x=>Math.max(0,Math.min(1,x));
+ function state(text,mode="off"){
+  $("audioState").textContent=text;
+  $("ambientLed").className="audio-led"+(mode==="on"?" on":mode==="alert"?" alert":"");
+ }
  function ensure(){
-   if(ctx)return;
-   const AC=window.AudioContext||window.webkitAudioContext;
-   if(!AC){setState('Web Audio не поддерживается');return}
-   ctx=new AC();master=ctx.createGain();ambBus=ctx.createGain();sigBus=ctx.createGain();
-   ambBus.connect(master);sigBus.connect(master);master.connect(ctx.destination);
-   ambBus.gain.value=.35;sigBus.gain.value=.65;master.gain.value=.85;
+  if(ctx)return true;
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC){state("Web Audio не поддерживается");return false;}
+  ctx=new AC();
+  master=ctx.createGain();ambBus=ctx.createGain();sigBus=ctx.createGain();
+  ambBus.connect(master);sigBus.connect(master);master.connect(ctx.destination);
+  master.gain.value=.82;updateVolumes();
+  return true;
  }
- function tone(freq,duration,volume=.12,wave='sine',bus=sigBus,delay=0){
-   if(!ctx||!bus)return;
-   const t=ctx.currentTime+delay,o=ctx.createOscillator(),g=ctx.createGain();
-   o.type=wave;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);
-   g.gain.exponentialRampToValueAtTime(Math.max(.001,volume),t+.018);
-   g.gain.setValueAtTime(Math.max(.001,volume),t+Math.max(.03,duration-.04));
-   g.gain.exponentialRampToValueAtTime(.0001,t+duration);
-   o.connect(g);g.connect(bus);o.start(t);o.stop(t+duration+.02);
+ function noiseBuffer(seconds=3){
+  const length=Math.floor(ctx.sampleRate*seconds),buffer=ctx.createBuffer(1,length,ctx.sampleRate),data=buffer.getChannelData(0);
+  let brown=0;
+  for(let i=0;i<length;i++){const white=Math.random()*2-1;brown=(brown+.025*white)/1.025;data[i]=brown*3.2;}
+  return buffer;
  }
- function noiseBuffer(){
-   const b=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=b.getChannelData(0);
-   for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.45;
-   return b;
+ function addOsc(freq,type,gain,bus,detune=0){
+  const osc=ctx.createOscillator(),amp=ctx.createGain();
+  osc.type=type;osc.frequency.value=freq;osc.detune.value=detune;amp.gain.value=gain;
+  osc.connect(amp);amp.connect(bus);osc.start();ambientNodes.push(osc,amp);return {osc,amp};
+ }
+ function addNoise(bus,level,low,high){
+  const src=ctx.createBufferSource(),hp=ctx.createBiquadFilter(),lp=ctx.createBiquadFilter(),amp=ctx.createGain();
+  src.buffer=noiseBuffer();src.loop=true;hp.type="highpass";hp.frequency.value=low;lp.type="lowpass";lp.frequency.value=high;amp.gain.value=level;
+  src.connect(hp);hp.connect(lp);lp.connect(amp);amp.connect(bus);src.start();ambientNodes.push(src,hp,lp,amp);return amp;
+ }
+ function transient(freq,duration,volume,wave="sine",bus=sigBus,delay=0){
+  if(!ctx)return;
+  const t=ctx.currentTime+delay,osc=ctx.createOscillator(),gain=ctx.createGain();
+  osc.type=wave;osc.frequency.setValueAtTime(freq,t);
+  gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(Math.max(.0002,volume),t+.008);
+  gain.gain.exponentialRampToValueAtTime(.0001,t+duration);
+  osc.connect(gain);gain.connect(bus);osc.start(t);osc.stop(t+duration+.025);
+ }
+ function burst(duration=.035,volume=.08,center=1200,bus=sigBus){
+  if(!ctx)return;
+  const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),amp=ctx.createGain(),t=ctx.currentTime;
+  src.buffer=noiseBuffer(.15);filter.type="bandpass";filter.frequency.value=center;filter.Q.value=1.8;
+  amp.gain.setValueAtTime(volume,t);amp.gain.exponentialRampToValueAtTime(.0001,t+duration);
+  src.connect(filter);filter.connect(amp);amp.connect(bus);src.start(t);src.stop(t+duration+.01);
+ }
+ function updateVolumes(){
+  if(!ctx)return;
+  ambBus.gain.setTargetAtTime(Number($("ambVol").value)/100,ctx.currentTime,.12);
+  sigBus.gain.setTargetAtTime(Number($("sigVol").value)/100,ctx.currentTime,.12);
+  $("ambVal").textContent=$("ambVol").value+"%";$("sigVal").textContent=$("sigVol").value+"%";
+ }
+ function scheduleRoomSounds(){
+  clearTimeout(relayTimer);if(!started)return;
+  relayTimer=setTimeout(()=>{
+   if(!started)return;
+   // Тихий случайный щелчок реле/контактора, без привязки к реальной аппаратуре.
+   burst(.022,.025,1450,ambBus);transient(780,.035,.018,"triangle",ambBus,.018);
+   if(Math.random()<.38)setTimeout(()=>{if(started)burst(.028,.018,950,ambBus)},90);
+   scheduleRoomSounds();
+  },11000+Math.random()*17000);
  }
  function startAmbient(){
-   ensure();if(!ctx)return;
-   ctx.resume();
-   if(started)return;
-   started=true;
-   const a=ctx.createOscillator(),ag=ctx.createGain();a.type='sine';a.frequency.value= fiftyFive();ag.gain.value=.18;a.connect(ag);ag.connect(ambBus);a.start();ambNodes.push(a,ag);
-   const b=ctx.createOscillator(),bg=ctx.createGain();b.type='triangle';b.frequency.value=110;bg.gain.value=.035;b.connect(bg);bg.connect(ambBus);b.start();ambNodes.push(b,bg);
-   const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),ng=ctx.createGain();src.buffer=noiseBuffer();src.loop=true;filter.type='lowpass';filter.frequency.value=390;ng.gain.value=.10;src.connect(filter);filter.connect(ng);ng.connect(ambBus);src.start();noiseNode=src;ambNodes.push(filter,ng);
-   const wob=ctx.createOscillator(),wg=ctx.createGain();wob.frequency.value=.17;wg.gain.value=5;wob.connect(wg);wg.connect(a.frequency);wob.start();ambNodes.push(wob,wg);
-   updateVolumes();setState('Атмосфера включена','on');scheduleRelay();
- }
- function fiftyFive(){return 55}
- function updateVolumes(){
-   if(!ctx)return;
-   ambBus.gain.setTargetAtTime(Number($('ambVol').value)/100,ctx.currentTime,.08);
-   sigBus.gain.setTargetAtTime(Number($('sigVol').value)/100,ctx.currentTime,.08);
-   $('ambVal').textContent=$('ambVol').value+'%';$('sigVal').textContent=$('sigVol').value+'%';
- }
- function scheduleRelay(){
-   clearTimeout(relayTimer);if(!started)return;
-   relayTimer=setTimeout(()=>{if(started&&ctx){tone(1250,.025,.025,'square',ambBus);scheduleRelay()}},8500+Math.random()*12500);
+  if(!ensure())return;ctx.resume();
+  if(started){state("Атмосфера помещения включена","on");return;}
+  started=true;
+  // Сетевой фон 50 Гц и его слабые гармоники.
+  addOsc(50,"sine",.035,ambBus);
+  addOsc(100,"sine",.012,ambBus);
+  addOsc(150,"sine",.004,ambBus);
+  // Низкий механический гул и мягкая вентиляционная полоса шума.
+  addOsc(56,"triangle",.025,ambBus,-5);
+  addOsc(112,"sine",.009,ambBus,4);
+  const ventilation=addNoise(ambBus,.19,65,520);
+  const air=addNoise(ambBus,.035,520,2100);
+  const lfo=ctx.createOscillator(),lfoGain=ctx.createGain();
+  lfo.frequency.value=.13;lfoGain.gain.value=.025;lfo.connect(lfoGain);lfoGain.connect(ventilation.gain);lfo.start();
+  ambientNodes.push(lfo,lfoGain);
+  scheduleRoomSounds();updateVolumes();state("Фоновая акустика включена","on");
  }
  function stopAlarm(){
-   alarmActive=false;alarmTimers.forEach(clearTimeout);alarmTimers=[];
-   if(started)setState('Атмосфера включена','on');else setState('Звук выключен');
+  alarmActive=false;clearTimeout(alarmTimer);alarmTimer=null;
+  if(started)state("Атмосфера помещения включена","on");else state("Звук выключен");
  }
  function stopAll(){
-   stopAlarm();started=false;clearTimeout(relayTimer);
-   if(ctx){ambNodes.forEach(n=>{try{if(n.stop)n.stop()}catch(e){}try{if(n.disconnect)n.disconnect()}catch(e){}});ambNodes=[];noiseNode=null;ctx.suspend()}
-   setState('Звук выключен');
+  stopAlarm();started=false;clearTimeout(relayTimer);relayTimer=null;
+  ambientNodes.forEach(node=>{try{if(node.stop)node.stop()}catch(e){}try{node.disconnect()}catch(e){}});
+  ambientNodes=[];if(ctx)ctx.suspend();state("Звук выключен");
  }
- function info(){ensure();if(!ctx)return;ctx.resume();tone(880,.12,.18);tone(1040,.16,.18,'sine',sigBus,.19)}
- function warning(){ensure();if(!ctx)return;ctx.resume();for(let i=0;i<3;i++){tone(640,.22,.22,'square',sigBus,i*.34)}}
+ function click(){
+  if(!ctx||ctx.state!=="running")return;
+  burst(.018,.045,1900);transient(165,.028,.025,"triangle",sigBus,.008);
+ }
+ function info(){
+  if(!ensure())return;ctx.resume();
+  // Короткий мягкий двухтональный звонок учебного уведомления.
+  transient(740,.16,.10,"sine");transient(988,.2,.085,"sine",sigBus,.13);
+ }
+ function warning(){
+  if(!ensure())return;ctx.resume();
+  // Низкий прерывистый зуммер, условный, не копия штатного сигнала.
+  for(let i=0;i<3;i++){transient(430,.19,.12,"square",sigBus,i*.31);transient(215,.19,.045,"sawtooth",sigBus,i*.31);}
+ }
  function alarm(){
-   ensure();if(!ctx)return;ctx.resume();stopAlarm();alarmActive=true;setState('Условная тревога звучит','alert');
-   let n=0;const pulse=()=>{if(!alarmActive)return;tone(n%2?930:690,.34,.25,'sawtooth');n++;alarmTimers.push(setTimeout(pulse,520))};pulse();
+  if(!ensure())return;ctx.resume();stopAlarm();alarmActive=true;state("Демонстрационный сигнал активен","alert");
+  let phase=0;
+  const pulse=()=>{
+   if(!alarmActive)return;
+   const f=phase%2?790:590;
+   transient(f,.26,.14,"square");transient(f*2,.24,.035,"sawtooth");
+   phase++;alarmTimer=setTimeout(pulse,440);
+  };
+  pulse();
  }
- window.BSHUAudio={info,warning,alarm,stopAlarm};
- $('audioStart').addEventListener('click',startAmbient);
- $('audioStop').addEventListener('click',stopAll);
- $('testInfo').addEventListener('click',info);
- $('testWarning').addEventListener('click',warning);
- $('testAlarm').addEventListener('click',alarm);
- $('stopAlarm').addEventListener('click',stopAlarm);
- $('ambVol').addEventListener('input',updateVolumes);
- $('sigVol').addEventListener('input',updateVolumes);
- document.addEventListener('visibilitychange',()=>{if(document.hidden&&alarmActive)stopAlarm()});
+ window.BSHUAudio={click,info,warning,alarm,stopAlarm};
+ $("audioStart").addEventListener("click",startAmbient);
+ $("audioStop").addEventListener("click",stopAll);
+ $("testInfo").addEventListener("click",info);
+ $("testWarning").addEventListener("click",warning);
+ $("testAlarm").addEventListener("click",alarm);
+ $("stopAlarm").addEventListener("click",stopAlarm);
+ $("ambVol").addEventListener("input",updateVolumes);
+ $("sigVol").addEventListener("input",updateVolumes);
+ // Тихая механическая отдача кнопок интерфейса; исключаем ползунки.
+ document.addEventListener("click",event=>{
+  const button=event.target.closest("button");
+  if(button&&!button.disabled&&!["audioStart","audioStop","testInfo","testWarning","testAlarm","stopAlarm"].includes(button.id))click();
+ });
+ document.addEventListener("visibilitychange",()=>{if(document.hidden&&alarmActive)stopAlarm()});
 })();
 </script>
 </body></html>
