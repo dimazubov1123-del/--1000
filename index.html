@@ -3,6 +3,22 @@
 <style>
 :root{color-scheme:dark;--bg:#101511;--p:#202920;--p2:#29352b;--line:#596653;--txt:#e2e8dc;--muted:#a5b09e;--green:#a7cf91;--amber:#e5bd68;--red:#df7165}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#394638,#101511 65%);color:var(--txt);font:14px "Segoe UI",Arial,sans-serif}header{position:sticky;top:0;background:#141b16ed;border-bottom:1px solid var(--line);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;z-index:2}.brand{display:flex;gap:13px;align-items:center}.seal{border:1px solid #829278;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;color:var(--green);font-weight:bold;font-size:11px;text-align:center}h1{font-size:16px;letter-spacing:1.6px;margin:0}.sub,small,.muted{color:var(--muted)}.sub{font-size:10px;letter-spacing:1.2px;margin-top:4px}.clock{font:22px Consolas;color:var(--green);text-align:right}.date{text-align:right;color:var(--muted);font-size:10px}.warning{margin:14px auto 0;max-width:1500px;padding:10px 14px;border:1px solid #806c43;background:#2c271b;color:#e9d8ae;font-size:12px}main{max-width:1500px;margin:auto;padding:16px 20px 28px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px}button{cursor:pointer;background:#273229;color:var(--txt);border:1px solid #65745f;padding:9px 12px;border-radius:3px}button:hover{filter:brightness(1.2)}button.active,.primary{background:#3a5039;border-color:#9ab58b}.warnbtn{border-color:#a2844b;color:#f0d59b}.layout{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px}.panel{background:linear-gradient(145deg,#273128,#171e19);border:1px solid var(--line);box-shadow:0 8px 24px #0005;min-width:0}.panel h2{font-size:11px;letter-spacing:1.2px;margin:0;padding:10px 12px;background:#354235;border-bottom:1px solid var(--line)}.body{padding:12px}.span2{grid-column:span 2}.full{grid-column:1/-1}.mimic{height:280px;position:relative;overflow:hidden;padding:15px;background-color:#141c16;background-image:linear-gradient(#77866c18 1px,transparent 1px),linear-gradient(90deg,#77866c18 1px,transparent 1px);background-size:23px 23px}.nodes{height:100%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:12px}.node{border:1px solid #74846e;background:#202b22eF;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8px;z-index:1}.node b{font-size:11px;letter-spacing:.7px}.lamp{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);margin-bottom:8px}.node small{font-size:9px;margin-top:5px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.metric{padding:10px;background:#111813;border:1px solid #465346}.metric label{display:block;color:var(--muted);font-size:9px;letter-spacing:.8px}.val{font:22px Consolas;color:var(--green);margin-top:5px}.unit{font-size:10px;color:var(--muted)}.gauges{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.gauge{text-align:center;background:#121914;border:1px solid #465346;padding:10px}.dial{width:88px;height:88px;border:7px solid #586655;border-right-color:var(--green);border-radius:50%;display:grid;place-items:center;margin:4px auto 8px}.dial b{font:19px Consolas;color:var(--green)}.gauge small{font-size:9px}.status{display:flex;justify-content:space-between;gap:8px;padding:9px;margin-bottom:6px;background:#141b16;border:1px solid #3e4a3f;font-size:11px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:7px}.amber{background:var(--amber)}.log{height:165px;overflow:auto;background:#101612;border:1px solid #3c493e;padding:8px;font:11px/1.7 Consolas}.entry{border-bottom:1px dotted #39443a;padding:2px}.time{color:#91a38e;margin-right:9px}.actions{display:flex;gap:8px;flex-wrap:wrap}.view[hidden]{display:none}.foot{margin-top:14px;padding-top:10px;border-top:1px solid #3c493e;color:#879385;font-size:9px;display:flex;justify-content:space-between;gap:10px}@media(max-width:900px){.layout{grid-template-columns:1fr 1fr}.span2{grid-column:span 2}}@media(max-width:600px){header{align-items:flex-start;flex-direction:column}.layout{grid-template-columns:1fr}.span2,.full{grid-column:auto}main{padding:12px}.warning{margin:12px}.mimic{height:330px}.nodes{gap:6px}.node b{font-size:9px}}
+
+.audio-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:10px}
+.audio-card{background:#111813;border:1px solid #465346;padding:12px;min-width:0}
+.audio-card h3{font-size:10px;letter-spacing:1px;margin:0 0 8px;color:#cbd8c4}
+.audio-card p{font-size:10px;color:var(--muted);line-height:1.5;margin:5px 0 10px}
+.audio-actions{display:flex;gap:7px;flex-wrap:wrap}
+.audio-actions button{font-size:10px;padding:7px 9px}
+.audio-row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:10px;margin:9px 0}
+.audio-row input[type=range]{width:100%;accent-color:#a7cf91}
+.audio-state{display:inline-flex;align-items:center;gap:6px;font-size:10px;color:var(--muted)}
+.audio-led{width:8px;height:8px;border-radius:50%;background:#687365;display:inline-block}
+.audio-led.on{background:var(--green);box-shadow:0 0 8px var(--green)}
+.audio-led.alert{background:var(--red);box-shadow:0 0 8px var(--red)}
+.audio-note{font-size:9px;color:#899686;margin-top:9px}
+@media(max-width:850px){.audio-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.audio-grid{grid-template-columns:1fr}}
 </style></head><body>
 <header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · РБМК-1000 · ИСТОРИЧЕСКАЯ УЧЕБНАЯ СИМУЛЯЦИЯ</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · УЧЕБНЫЙ РЕЖИМ</div></div></header>
 <div class="warning"><b>УЧЕБНЫЙ МАКЕТ.</b> Показания, схемы и события условны. Это не точная копия штатного БЩУ, не цифровой двойник и не руководство по эксплуатации реального РБМК.</div>
@@ -12,6 +28,12 @@
 <article class="panel"><h2>СВОДНЫЕ ПОКАЗАТЕЛИ МОДЕЛИ</h2><div class="body"><div class="metrics"><div class="metric"><label>ИНДЕКС НАГРУЗКИ</label><div class="val">72.0</div><span class="unit">усл. ед.</span></div><div class="metric"><label>ТЕПЛОВОЙ БАЛАНС</label><div class="val">68.4</div><span class="unit">усл. ед.</span></div><div class="metric"><label>ДОСТУПНОСТЬ</label><div class="val">98%</div><span class="unit">условная оценка</span></div><div class="metric"><label>СООБЩЕНИЯ</label><div class="val" id="alarms">00</div><span class="unit">активные</span></div></div></div></article>
 <article class="panel"><h2>КОНТРОЛЬНЫЕ ИНДИКАТОРЫ</h2><div class="body"><div class="gauges"><div class="gauge"><div class="dial"><b>72%</b></div><small>ИНДЕКС НАГРУЗКИ</small></div><div class="gauge"><div class="dial"><b>68%</b></div><small>ТЕПЛОВОЙ БАЛАНС</small></div><div class="gauge"><div class="dial"><b>96%</b></div><small>ГОТОВНОСТЬ МОДЕЛИ</small></div><div class="gauge"><div class="dial"><b>00</b></div><small>ТРЕВОГИ</small></div></div></div></article>
 <article class="panel"><h2>СОСТОЯНИЕ ПОДСИСТЕМ</h2><div class="body"><div class="status"><span><i class="dot"></i>Мнемосхема блока</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Циркуляционная модель</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №1</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №2</span><b>НОРМА</b></div><div class="status"><span><i class="dot amber"></i>Историческая справка</span><b>ДОСТУПНА</b></div></div></article>
+
+<article class="panel full"><h2>ЗВУКОВАЯ СРЕДА БЩУ · УЧЕБНАЯ АУДИОСИСТЕМА</h2><div class="body"><div class="audio-grid">
+<div class="audio-card"><h3>АТМОСФЕРА ПОМЕЩЕНИЯ</h3><div class="audio-state"><i class="audio-led" id="ambientLed"></i><span id="audioState">Звук выключен</span></div><p>Низкий фоновый гул, вентиляционный шум и редкие негромкие щелчки аппаратуры.</p><div class="audio-actions"><button class="primary" id="audioStart">Включить звук</button><button id="audioStop">Остановить</button></div></div>
+<div class="audio-card"><h3>УЧЕБНЫЕ СИГНАЛЫ</h3><p>Отдельные звуковые обозначения для сообщений, предупреждений и условной тревоги.</p><div class="audio-actions"><button id="testInfo">Сообщение</button><button class="warnbtn" id="testWarning">Предупреждение</button><button class="warnbtn" id="testAlarm">Тревога</button><button id="stopAlarm">Стоп сигнала</button></div></div>
+<div class="audio-card"><h3>МИКШЕР ГРОМКОСТИ</h3><div class="audio-row"><label for="ambVol">Фоновая атмосфера</label><span id="ambVal">35%</span></div><input id="ambVol" type="range" min="0" max="100" value="35" aria-label="Громкость фоновой атмосферы"><div class="audio-row"><label for="sigVol">Сигналы и тревоги</label><span id="sigVal">65%</span></div><input id="sigVol" type="range" min="0" max="100" value="65" aria-label="Громкость сигналов и тревог"><div class="audio-note">Звук формируется браузером. Для воспроизведения требуется включить аудиосистему.</div></div>
+</div></div></article>
 <article class="panel span2"><h2>ОПЕРАТИВНЫЙ ЖУРНАЛ</h2><div class="body"><div class="log" id="log"><div class="entry"><span class="time">08:00:00</span>Начало учебной смены. Тренажёр готов.</div><div class="entry"><span class="time">08:00:01</span>Проверка интерфейсных модулей завершена.</div><div class="entry"><span class="time">08:00:02</span>Все показания являются условными.</div></div></div></article>
 <article class="panel"><h2>ДЕЙСТВИЯ СМЕНЫ</h2><div class="body"><div class="actions"><button class="primary" id="accept">Принять смену</button><button id="message" class="warnbtn">Учебное сообщение</button><button id="ack">Квитировать</button></div><p class="muted" style="font-size:10px">Действия влияют только на журнал и учебные отметки интерфейса.</p></div></article></section>
 <section class="layout view" id="reactor" hidden><article class="panel span2"><h2>РЕАКТОРНЫЙ ЗАЛ · УСЛОВНОЕ ПРЕДСТАВЛЕНИЕ</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><b>СЕКТОР A</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР B</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР C</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР D</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СИСТЕМЫ КОНТРОЛЯ</b><small>СПРАВОЧНЫЙ БЛОК</small></div><div class="node"><b>АРХИВ СОБЫТИЙ</b><small>УЧЕБНЫЙ ЖУРНАЛ</small></div></div></div></div></article><article class="panel"><h2>ПРИМЕЧАНИЕ</h2><div class="body">Схема условная, не воспроизводит геометрию активной зоны, каналы, измерительные точки или реальные системы управления.</div></article></section>
@@ -27,4 +49,82 @@ el('accept').onclick=()=>{if(accepted){addLog('Повторная отметка
 el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ УЧЕБНОЕ СООБЩЕНИЕ: ознакомьтесь с записью.');alert('Учебное информационное сообщение. Не является описанием реальной аварии или инструкцией оператору.')};
 el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых учебных сообщений для квитирования.');return}activeMessage=false;el('alarms').textContent='00';addLog('Учебное сообщение отмечено оператором.')};
 el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('ЗАПИСЬ ОПЕРАТОРА: '+t);el('note').value=''};
-</script></body></html>
+</script>
+<script>
+/* Учебная аудиосистема: синтезированные атмосферные эффекты, не копия штатной сигнализации. */
+(()=>{
+ let ctx=null,master=null,ambBus=null,sigBus=null,ambNodes=[],noiseNode=null,alarmTimers=[],relayTimer=null,alarmActive=false,started=false;
+ const $=id=>document.getElementById(id);
+ const clamp=n=>Math.max(0,Math.min(1,n));
+ function setState(t,mode){$('audioState').textContent=t;$('ambientLed').className='audio-led'+(mode==='on'?' on':mode==='alert'?' alert':'')}
+ function ensure(){
+   if(ctx)return;
+   const AC=window.AudioContext||window.webkitAudioContext;
+   if(!AC){setState('Web Audio не поддерживается');return}
+   ctx=new AC();master=ctx.createGain();ambBus=ctx.createGain();sigBus=ctx.createGain();
+   ambBus.connect(master);sigBus.connect(master);master.connect(ctx.destination);
+   ambBus.gain.value=.35;sigBus.gain.value=.65;master.gain.value=.85;
+ }
+ function tone(freq,duration,volume=.12,wave='sine',bus=sigBus,delay=0){
+   if(!ctx||!bus)return;
+   const t=ctx.currentTime+delay,o=ctx.createOscillator(),g=ctx.createGain();
+   o.type=wave;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);
+   g.gain.exponentialRampToValueAtTime(Math.max(.001,volume),t+.018);
+   g.gain.setValueAtTime(Math.max(.001,volume),t+Math.max(.03,duration-.04));
+   g.gain.exponentialRampToValueAtTime(.0001,t+duration);
+   o.connect(g);g.connect(bus);o.start(t);o.stop(t+duration+.02);
+ }
+ function noiseBuffer(){
+   const b=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=b.getChannelData(0);
+   for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.45;
+   return b;
+ }
+ function startAmbient(){
+   ensure();if(!ctx)return;
+   ctx.resume();
+   if(started)return;
+   started=true;
+   const a=ctx.createOscillator(),ag=ctx.createGain();a.type='sine';a.frequency.value= fiftyFive();ag.gain.value=.18;a.connect(ag);ag.connect(ambBus);a.start();ambNodes.push(a,ag);
+   const b=ctx.createOscillator(),bg=ctx.createGain();b.type='triangle';b.frequency.value=110;bg.gain.value=.035;b.connect(bg);bg.connect(ambBus);b.start();ambNodes.push(b,bg);
+   const src=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),ng=ctx.createGain();src.buffer=noiseBuffer();src.loop=true;filter.type='lowpass';filter.frequency.value=390;ng.gain.value=.10;src.connect(filter);filter.connect(ng);ng.connect(ambBus);src.start();noiseNode=src;ambNodes.push(filter,ng);
+   const wob=ctx.createOscillator(),wg=ctx.createGain();wob.frequency.value=.17;wg.gain.value=5;wob.connect(wg);wg.connect(a.frequency);wob.start();ambNodes.push(wob,wg);
+   updateVolumes();setState('Атмосфера включена','on');scheduleRelay();
+ }
+ function fiftyFive(){return 55}
+ function updateVolumes(){
+   if(!ctx)return;
+   ambBus.gain.setTargetAtTime(Number($('ambVol').value)/100,ctx.currentTime,.08);
+   sigBus.gain.setTargetAtTime(Number($('sigVol').value)/100,ctx.currentTime,.08);
+   $('ambVal').textContent=$('ambVol').value+'%';$('sigVal').textContent=$('sigVol').value+'%';
+ }
+ function scheduleRelay(){
+   clearTimeout(relayTimer);if(!started)return;
+   relayTimer=setTimeout(()=>{if(started&&ctx){tone(1250,.025,.025,'square',ambBus);scheduleRelay()}},8500+Math.random()*12500);
+ }
+ function stopAlarm(){
+   alarmActive=false;alarmTimers.forEach(clearTimeout);alarmTimers=[];
+   if(started)setState('Атмосфера включена','on');else setState('Звук выключен');
+ }
+ function stopAll(){
+   stopAlarm();started=false;clearTimeout(relayTimer);
+   if(ctx){ambNodes.forEach(n=>{try{if(n.stop)n.stop()}catch(e){}try{if(n.disconnect)n.disconnect()}catch(e){}});ambNodes=[];noiseNode=null;ctx.suspend()}
+   setState('Звук выключен');
+ }
+ function info(){ensure();if(!ctx)return;ctx.resume();tone(880,.12,.18);tone(1040,.16,.18,'sine',sigBus,.19)}
+ function warning(){ensure();if(!ctx)return;ctx.resume();for(let i=0;i<3;i++){tone(640,.22,.22,'square',sigBus,i*.34)}}
+ function alarm(){
+   ensure();if(!ctx)return;ctx.resume();stopAlarm();alarmActive=true;setState('Условная тревога звучит','alert');
+   let n=0;const pulse=()=>{if(!alarmActive)return;tone(n%2?930:690,.34,.25,'sawtooth');n++;alarmTimers.push(setTimeout(pulse,520))};pulse();
+ }
+ $('audioStart').addEventListener('click',startAmbient);
+ $('audioStop').addEventListener('click',stopAll);
+ $('testInfo').addEventListener('click',info);
+ $('testWarning').addEventListener('click',warning);
+ $('testAlarm').addEventListener('click',alarm);
+ $('stopAlarm').addEventListener('click',stopAlarm);
+ $('ambVol').addEventListener('input',updateVolumes);
+ $('sigVol').addEventListener('input',updateVolumes);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&alarmActive)stopAlarm()});
+})();
+</script>
+</body></html>
