@@ -78,6 +78,20 @@
 .viur-lower{margin-top:8px;padding:8px;background:linear-gradient(#252e25,#151b16);border:1px solid #68745f;display:flex;gap:5px;flex-wrap:wrap;align-items:center}.lower-label{width:100%;font:8px Consolas;color:#c4ceba;margin-bottom:3px}.dummy-button{background:linear-gradient(#4b5547,#252d25);border:1px solid #879078;padding:7px 8px;color:#d0d7c7;font:7px Consolas;box-shadow:inset 0 1px #c5cbb555}
 @media(max-width:1100px){.viur-face{grid-template-columns:1fr 1fr}.viur-seal-bank{grid-column:1/-1;grid-template-columns:1fr 1fr 1fr}.viur-seal-bank .bank-title,.sealed-note{grid-column:1/-1}}
 @media(max-width:600px){.viur-face{grid-template-columns:1fr}.viur-seal-bank{grid-column:auto;grid-template-columns:1fr 1fr}}
+
+/* Архивная фотоподложка для исторической сверки */
+.viur-archive{margin:0 0 10px;padding:9px;background:linear-gradient(145deg,#202920,#141a15);border:1px solid #68745f}
+.viur-archive-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px;color:#d4dccb;font:9px Consolas;letter-spacing:.8px}
+.viur-archive-head a{color:#b8cf9f;text-decoration:none}
+.viur-archive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.viur-archive-shot{margin:0;min-width:0;background:#0d120e;border:1px solid #586450}
+.viur-archive-shot a{display:block}
+.viur-archive-shot img{display:block;width:100%;height:128px;object-fit:cover;filter:saturate(.72) contrast(1.04);background:#202820}
+.viur-archive-shot figcaption{padding:6px;color:#c4cdbb;font:8px/1.45 Arial}
+.viur-archive-shot figcaption b{display:block;color:#e0e5d9;font:9px Consolas;margin-bottom:3px}
+.viur-archive-note{margin-top:7px;color:#aab5a2;font:8px/1.5 Arial}
+@media(max-width:650px){.viur-archive-grid{grid-template-columns:1fr}.viur-archive-shot img{height:180px}}
+
 </style></head><body>
 <header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · РБМК-1000 · ИСТОРИЧЕСКАЯ УЧЕБНАЯ СИМУЛЯЦИЯ</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · УЧЕБНЫЙ РЕЖИМ</div></div></header>
 <div class="warning"><b>УЧЕБНЫЙ МАКЕТ.</b> Показания, схемы и события условны. Это не точная копия штатного БЩУ, не цифровой двойник и не руководство по эксплуатации реального РБМК.</div>
