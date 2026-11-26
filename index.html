@@ -126,6 +126,36 @@
 @media(max-width:600px){.viur-face{grid-template-columns:1fr}.viur-seal-bank{grid-column:auto;grid-template-columns:1fr 1fr}.round-meter{width:70px;height:70px}}
 
 .viur-seal-bank .sealed-control .seal-break,.viur-seal-bank .sealed-control .unit-activate{display:block;width:100%;margin:7px 0 0;padding:7px 4px;font:8px Consolas;letter-spacing:.3px}.viur-seal-bank .sealed-control .seal-break{background:linear-gradient(#715d3a,#302719);border-color:#b99a61;color:#f0d9a5}.viur-seal-bank .sealed-control .unit-activate:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(1)}.viur-seal-bank .sealed-control.seal-broken .seal-tag{background:#633a2c;color:#ffd0b8;border-color:#b86c50}.viur-seal-bank .sealed-control.seal-broken .cap:after{height:0;width:0;border:0;box-shadow:none}.viur-seal-bank .sealed-control.unit-active{border-color:#c58b54!important;box-shadow:inset 0 0 18px #9c653522,0 0 10px #d09a4a44!important}.viur-seal-bank .sealed-control.unit-active .unit-state{color:#f1c77d}.decor-toggle{cursor:pointer;user-select:none}.decor-toggle:focus-visible{outline:2px solid #c4dfa9;outline-offset:2px}.decor-toggle.demo-on span{background:#caa85c;box-shadow:0 0 10px #d7b65e}
+
+/* Интерактивная учебная секция ВИУР — все шкалы условные, не связаны с реактором */
+.viur-sim-section{margin-top:12px;border:2px solid #87917a;background:linear-gradient(145deg,#283329,#111813);padding:12px;box-shadow:inset 0 2px 8px #0009}
+.viur-sim-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px;font:10px Consolas;letter-spacing:1px;color:#e0e5d8}
+.sim-tag{font:8px Consolas;color:#e7d49d;border:1px solid #8d7950;padding:4px 7px}
+.viur-sim-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:10px}
+.sim-card{background:#121914;border:1px solid #74816b;padding:10px;min-width:0}
+.sim-card h4{font:9px Consolas;letter-spacing:.8px;color:#d9dfcf;margin:0 0 9px;border-bottom:1px solid #586450;padding-bottom:7px}
+.sim-gauges{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sim-gauge{background:linear-gradient(#273128,#101611);border:1px solid #78836d;padding:8px 4px;text-align:center}
+.sim-dial{width:76px;height:76px;margin:0 auto 6px;border:5px solid #89917b;border-radius:50%;background:radial-gradient(circle,#111811 0 58%,#3b4639 60%);position:relative;box-shadow:inset 0 0 8px #000,0 2px 4px #000}
+.sim-needle{position:absolute;width:2px;height:27px;left:32px;top:9px;background:#e1d39f;transform-origin:bottom center;transform:rotate(-55deg);box-shadow:0 0 3px #000}
+.sim-dial:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#c5c9b4;left:28px;top:32px}
+.sim-gauge b{display:block;font:14px Consolas;color:#c0d99f}
+.sim-gauge small{font:7px Arial;color:#aeb9a5}
+.sim-readouts{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}
+.sim-readout{background:#090f0b;border:1px solid #53604f;padding:7px;font:8px Consolas;color:#aeb9a5}
+.sim-readout b{display:block;color:#c1d9a2;font:13px Consolas;margin-top:4px}
+.group-controls{display:grid;gap:8px}
+.group-row{border:1px solid #596650;background:#1b241c;padding:8px}
+.group-row label{display:flex;justify-content:space-between;gap:8px;font:8px Consolas;color:#d2dac9;margin-bottom:6px}
+.group-row input{width:100%;accent-color:#a7cf91}
+.group-track{height:10px;background:#090e0a;border:1px solid #69765f;margin-top:5px;position:relative}
+.group-fill{height:100%;width:50%;background:linear-gradient(90deg,#536d47,#b4d18e);transition:width .15s}
+.group-controls-note{font:8px/1.5 Arial;color:#b4beaa;margin-top:8px}
+.sim-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.sim-actions button{font-size:8px;padding:7px 9px}
+.sim-status{font:8px Consolas;color:#d7dcbf;margin-top:8px;padding:7px;background:#0b120d;border:1px solid #52604d}
+@media(max-width:700px){.viur-sim-grid{grid-template-columns:1fr}.sim-gauges{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:420px){.sim-gauges{grid-template-columns:1fr 1fr}}
 </style></head><body>
 <header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · РБМК-1000 · ИСТОРИЧЕСКАЯ УЧЕБНАЯ СИМУЛЯЦИЯ</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · УЧЕБНЫЙ РЕЖИМ</div></div></header>
 <div class="warning"><b>УЧЕБНЫЙ МАКЕТ.</b> Показания, схемы и события условны. Это не точная копия штатного БЩУ, не цифровой двойник и не руководство по эксплуатации реального РБМК.</div>
@@ -163,7 +193,39 @@
 <div class="sealed-control" data-demo-unit="АЗС"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>АЗС</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗС">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗС" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
 <div class="sealed-control" data-demo-unit="ПИТ-МУФТ"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>ПИТ-МУФТ</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="ПИТ-МУФТ">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="ПИТ-МУФТ" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
 <div class="sealed-note">Срыв пломбы и активация меняют только состояние игрового макета, подсветку и журнал. Это не штатные органы и не модель систем защиты реактора.</div></div>
-</div><div class="viur-lower"><div class="lower-label">НИЖНЯЯ ПАНЕЛЬ · ИНТЕРАКТИВНЫЕ КНОПКИ ИНТЕРФЕЙСА</div><button type="button" class="dummy-button" data-console-action="control">КОНТРОЛЬ</button><button type="button" class="dummy-button" data-console-action="overview">ОБЗОР</button><button type="button" class="dummy-button" data-console-action="summary">СВОДКА</button><button type="button" class="dummy-button" data-console-action="archive">АРХИВ</button><button type="button" class="dummy-button" data-console-action="comms">СВЯЗЬ</button><button type="button" class="dummy-button" data-console-action="reserve">РЕЗЕРВ</button><button type="button" class="dummy-button" data-console-action="indicators">ИНДИКАЦИЯ</button><div class="viur-action-status" id="viurActionStatus" role="status" aria-live="polite">ГОТОВНОСТЬ ИНТЕРФЕЙСА · ВЫБЕРИТЕ РАЗДЕЛ</div></div>
+</div>
+<section class="viur-sim-section" id="viurSim">
+ <div class="viur-sim-head"><span>ДОПОЛНИТЕЛЬНОЕ ПРИБОРНОЕ ПОЛЕ · ВИУР</span><span class="sim-tag">УЧЕБНАЯ МОДЕЛЬ</span></div>
+ <div class="viur-sim-grid">
+  <div class="sim-card">
+   <h4>АНАЛОГОВЫЕ УКАЗАТЕЛИ · УСЛОВНЫЕ ШКАЛЫ</h4>
+   <div class="sim-gauges">
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle1"></i></div><b id="simGauge1">52</b><small>ДАВЛЕНИЕ · УСЛ. ЕД.</small></div>
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle2"></i></div><b id="simGauge2">67</b><small>ТЕМПЕРАТУРА · УСЛ. ЕД.</small></div>
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle3"></i></div><b id="simGauge3">43</b><small>РАСХОД · УСЛ. ЕД.</small></div>
+   </div>
+   <div class="sim-readouts">
+    <div class="sim-readout">КАНАЛ ИЗМЕРЕНИЯ A<b id="simReadA">СТАБИЛЕН</b></div>
+    <div class="sim-readout">КАНАЛ ИЗМЕРЕНИЯ B<b id="simReadB">СТАБИЛЕН</b></div>
+    <div class="sim-readout">СВЯЗЬ С МОДЕЛЬЮ<b>ОТСУТСТВУЕТ</b></div>
+    <div class="sim-readout">ТИП ПОКАЗАНИЙ<b>ИГРОВЫЕ</b></div>
+   </div>
+  </div>
+  <div class="sim-card">
+   <h4>ИНДИКАТОРЫ ПОЛОЖЕНИЯ · ДЕМОНСТРАЦИОННЫЕ ГРУППЫ</h4>
+   <div class="group-controls">
+    <div class="group-row"><label><span>ГРУППА A · УКАЗАТЕЛЬ</span><b id="groupValA">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="A"><div class="group-track"><div class="group-fill" id="groupFillA"></div></div></div>
+    <div class="group-row"><label><span>ГРУППА B · УКАЗАТЕЛЬ</span><b id="groupValB">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="B"><div class="group-track"><div class="group-fill" id="groupFillB"></div></div></div>
+    <div class="group-row"><label><span>ГРУППА C · УКАЗАТЕЛЬ</span><b id="groupValC">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="C"><div class="group-track"><div class="group-fill" id="groupFillC"></div></div></div>
+    <div class="group-row"><label><span>ГРУППА D · УКАЗАТЕЛЬ</span><b id="groupValD">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="D"><div class="group-track"><div class="group-fill" id="groupFillD"></div></div></div>
+   </div>
+   <div class="group-controls-note">Ползунки двигают только графические указатели вымышленных групп. Они не соответствуют реальным стержням, глубине погружения, каналам, приводам или режимам РБМК.</div>
+   <div class="sim-actions"><button type="button" id="simLampTest">ПРОВЕРКА ИНДИКАЦИИ</button><button type="button" id="simReset">СБРОС МАКЕТА</button></div>
+   <div class="sim-status" id="simStatus" aria-live="polite">МАКЕТ ГОТОВ · ФИЗИЧЕСКОЙ МОДЕЛИ РЕАКТОРА НЕТ</div>
+  </div>
+ </div>
+</section>
+<div class="viur-lower"><div class="lower-label">НИЖНЯЯ ПАНЕЛЬ · ИНТЕРАКТИВНЫЕ КНОПКИ ИНТЕРФЕЙСА</div><button type="button" class="dummy-button" data-console-action="control">КОНТРОЛЬ</button><button type="button" class="dummy-button" data-console-action="overview">ОБЗОР</button><button type="button" class="dummy-button" data-console-action="summary">СВОДКА</button><button type="button" class="dummy-button" data-console-action="archive">АРХИВ</button><button type="button" class="dummy-button" data-console-action="comms">СВЯЗЬ</button><button type="button" class="dummy-button" data-console-action="reserve">РЕЗЕРВ</button><button type="button" class="dummy-button" data-console-action="indicators">ИНДИКАЦИЯ</button><div class="viur-action-status" id="viurActionStatus" role="status" aria-live="polite">ГОТОВНОСТЬ ИНТЕРФЕЙСА · ВЫБЕРИТЕ РАЗДЕЛ</div></div>
 <details class="viur-archive-details" id="viurArchive"><summary>АРХИВНЫЕ ФОТОГРАФИИ И ИСТОЧНИКИ · БЩУ-4</summary><div class="viur-archive">
  <div class="viur-archive-head"><span>АРХИВНЫЕ ФОТОГРАФИИ · БЩУ-4</span><a href="https://www.svoboda.org/a/28118262.html" target="_blank" rel="noopener">ОТКРЫТЬ ФОТОРЕПОРТАЖ ↗</a></div>
  <div class="viur-archive-grid">
@@ -260,6 +322,44 @@ el('accept').onclick=()=>{if(accepted){addLog('Повторная отметка
 el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ УЧЕБНОЕ СООБЩЕНИЕ: ознакомьтесь с записью.');if(window.BSHUAudio)window.BSHUAudio.info()};
 el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых учебных сообщений для квитирования.');return}activeMessage=false;el('alarms').textContent='00';addLog('Учебное сообщение отмечено оператором.')};
 el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('ЗАПИСЬ ОПЕРАТОРА: '+t);el('note').value=''};
+
+/* Учебная приборная панель: независимые визуальные индикаторы без модели реактора. */
+(()=>{
+ const $=id=>document.getElementById(id);
+ const clamp=n=>Math.max(0,Math.min(100,Number(n)||0));
+ function gauge(n,id){
+  const value=clamp(n);const out=$("simGauge"+id),needle=$("simNeedle"+id);
+  if(out)out.textContent=String(Math.round(value));
+  if(needle)needle.style.transform="rotate("+(-135+value*2.7)+"deg)";
+ }
+ [52,67,43].forEach((v,i)=>gauge(v,i+1));
+ document.querySelectorAll("[data-sim-group]").forEach(input=>{
+  const key=input.dataset.simGroup;
+  const update=()=>{
+   const value=clamp(input.value);
+   $("groupVal"+key).textContent=Math.round(value)+"%";
+   $("groupFill"+key).style.width=value+"%";
+   $("simStatus").textContent="ИЗМЕНЁН УКАЗАТЕЛЬ ГРУППЫ "+key+" · ТОЛЬКО ГРАФИЧЕСКИЙ МАКЕТ";
+  };
+  input.addEventListener("input",update);
+ });
+ $("simLampTest")?.addEventListener("click",()=>{
+  document.querySelectorAll("#viurSim .sim-readout").forEach((x,i)=>x.style.borderColor=i%2?"#b99a5b":"#a7cf91");
+  $("simReadA").textContent="ТЕСТ";$("simReadB").textContent="ТЕСТ";
+  $("simStatus").textContent="ПРОВЕРКА ЛАМП ВЫПОЛНЕНА · УЧЕБНАЯ ИНДИКАЦИЯ";
+  if(window.BSHUAudio)window.BSHUAudio.info();
+  addLog("ВИУР: выполнена проверка учебной индикации.");
+ });
+ $("simReset")?.addEventListener("click",()=>{
+  document.querySelectorAll("[data-sim-group]").forEach(input=>{input.value=50;input.dispatchEvent(new Event("input"))});
+  [52,67,43].forEach((v,i)=>gauge(v,i+1));
+  $("simReadA").textContent="СТАБИЛЕН";$("simReadB").textContent="СТАБИЛЕН";
+  document.querySelectorAll("#viurSim .sim-readout").forEach(x=>x.style.borderColor="");
+  $("simStatus").textContent="МАКЕТ СБРОШЕН · ВСЕ ПОКАЗАНИЯ УСЛОВНЫЕ";
+  addLog("ВИУР: демонстрационная панель возвращена к исходным значениям.");
+ });
+})();
+
 </script>
 <script>
 /* Акустическая стилизация помещения: синтез Web Audio, не архивная запись ЧАЭС. */
