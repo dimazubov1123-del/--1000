@@ -46,7 +46,7 @@ setInterval(()=>{seconds++;el('clock').textContent=[Math.floor(seconds/3600)%24,
 function addLog(t){const d=document.createElement('div');d.className='entry';const tm=document.createElement('span');tm.className='time';tm.textContent=el('clock').textContent;d.append(tm,document.createTextNode(t));el('log').append(d);el('log').scrollTop=el('log').scrollHeight}
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.hidden=v.id!==b.dataset.tab)});
 el('accept').onclick=()=>{if(accepted){addLog('Повторная отметка: смена уже принята.');return}accepted=true;el('shiftstate').textContent='Учебная смена принята. Выполнено ознакомление с журналом.';addLog('Учебная смена принята.')};
-el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ УЧЕБНОЕ СООБЩЕНИЕ: ознакомьтесь с записью.');alert('Учебное информационное сообщение. Не является описанием реальной аварии или инструкцией оператору.')};
+el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ УЧЕБНОЕ СООБЩЕНИЕ: ознакомьтесь с записью.');if(window.BSHUAudio)window.BSHUAudio.info()};
 el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых учебных сообщений для квитирования.');return}activeMessage=false;el('alarms').textContent='00';addLog('Учебное сообщение отмечено оператором.')};
 el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('ЗАПИСЬ ОПЕРАТОРА: '+t);el('note').value=''};
 </script>
@@ -116,6 +116,7 @@ el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('З�
    ensure();if(!ctx)return;ctx.resume();stopAlarm();alarmActive=true;setState('Условная тревога звучит','alert');
    let n=0;const pulse=()=>{if(!alarmActive)return;tone(n%2?930:690,.34,.25,'sawtooth');n++;alarmTimers.push(setTimeout(pulse,520))};pulse();
  }
+ window.BSHUAudio={info,warning,alarm,stopAlarm};
  $('audioStart').addEventListener('click',startAmbient);
  $('audioStop').addEventListener('click',stopAll);
  $('testInfo').addEventListener('click',info);
