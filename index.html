@@ -30,6 +30,10 @@
 .sealed-control button{margin-top:9px;font-size:9px;padding:5px 8px;border-color:#8d8059;color:#dfd1a9;background:#302c20}
 .seal-foot{font-size:9px;color:#a6af9e;margin-top:10px}
 @media(max-width:850px){.seal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.seal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:850px){.seal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.seal-grid{grid-template-columns:1fr 1fr}}
 </style></head><body>
 <header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · РБМК-1000 · ИСТОРИЧЕСКАЯ УЧЕБНАЯ СИМУЛЯЦИЯ</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · УЧЕБНЫЙ РЕЖИМ</div></div></header>
 <div class="warning"><b>УЧЕБНЫЙ МАКЕТ.</b> Показания, схемы и события условны. Это не точная копия штатного БЩУ, не цифровой двойник и не руководство по эксплуатации реального РБМК.</div>
@@ -46,12 +50,17 @@
 <div class="audio-card"><h3>МИКШЕР ГРОМКОСТИ</h3><div class="audio-row"><label for="ambVol">Фоновая атмосфера</label><span id="ambVal">35%</span></div><input id="ambVol" type="range" min="0" max="100" value="35" aria-label="Громкость фоновой атмосферы"><div class="audio-row"><label for="sigVol">Сигналы и тревоги</label><span id="sigVal">65%</span></div><input id="sigVol" type="range" min="0" max="100" value="65" aria-label="Громкость сигналов и тревог"><div class="audio-note">Звук формируется браузером. Для воспроизведения требуется включить аудиосистему.</div></div>
 </div></div></article>
 
-<article class="panel full"><h2>ЗАЩИЩЁННЫЕ ОРГАНЫ УПРАВЛЕНИЯ · УЧЕБНЫЙ МАКЕТ</h2><div class="body"><div class="seal-grid">
-<div class="sealed-control"><span class="seal-tag">ПЛОМБА № 041</span><div class="cap"></div><b>АЗ-5</b><small>Аварийная защита · макет</small><button type="button" data-sealed="АЗ-5">Осмотреть пломбу</button></div>
-<div class="sealed-control"><span class="seal-tag">ПЛОМБА № 042</span><div class="cap"></div><b>АЗ-3</b><small>Защищённая кнопка · макет</small><button type="button" data-sealed="АЗ-3">Осмотреть пломбу</button></div>
-<div class="sealed-control"><span class="seal-tag">ПЛОМБА № 043</span><div class="cap"></div><b>ПИТ-МУФТ</b><small>Обозначение по запросу · макет</small><button type="button" data-sealed="ПИТ-МУФТ">Осмотреть пломбу</button></div>
-<div class="sealed-control"><span class="seal-tag">ПЛОМБА № 044</span><div class="cap"></div><b>РЕЗЕРВ</b><small>Дополнительный защищённый орган</small><button type="button" data-sealed="РЕЗЕРВ">Осмотреть пломбу</button></div>
-</div><div class="seal-foot">Пломбы и защитные колпаки изображены условно. Органы управления заблокированы: нажатия не вызывают команд, не моделируют логику АЗ и не изменяют состояние реакторной установки.</div></div></article>
+<article class="panel full"><h2>ПУЛЬТ №1 · РАБОЧЕЕ МЕСТО ВИУР · РЕАКТОРНОЕ УПРАВЛЕНИЕ</h2><div class="body">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+<div class="audio-card"><h3>ПЕРВЫЙ ПУЛЬТ · РЕАКТОРНЫЙ КОНТУР</h3><p>Условная реконструкция рабочего места ведущего инженера управления реактором (ВИУР). Элементы расположены на общей лицевой панели, а не вынесены в отдельный блок.</p></div>
+<div class="audio-card"><h3>СОСЕДНИЕ РАБОЧИЕ МЕСТА</h3><p>ВИУР · ВИУТ · старший инженер и персонал смены. Это схема зонирования рабочих мест, а не точный масштабный чертёж БЩУ-4.</p></div>
+</div>
+<div class="seal-grid">
+<div class="sealed-control"><span class="seal-tag">ПЛОМБА · МАКЕТ</span><div class="cap"></div><b>АЗ-5</b><small>Защищённый орган · место на пульте №1</small><button type="button" data-sealed="АЗ-5">Осмотреть пломбу</button></div>
+<div class="sealed-control"><span class="seal-tag">ПЛОМБА · МАКЕТ</span><div class="cap"></div><b>АЗ-3</b><small>Защищённый орган · макет</small><button type="button" data-sealed="АЗ-3">Осмотреть пломбу</button></div>
+<div class="sealed-control"><span class="seal-tag">ПЛОМБА · МАКЕТ</span><div class="cap"></div><b>ПИТ-МУФТ</b><small>Обозначение требует архивной сверки</small><button type="button" data-sealed="ПИТ-МУФТ">Осмотреть пломбу</button></div>
+<div class="sealed-control"><span class="seal-tag">ПЛОМБА · МАКЕТ</span><div class="cap"></div><b>РЕЗЕРВ</b><small>Место под подтверждённую маркировку</small><button type="button" data-sealed="РЕЗЕРВ">Осмотреть пломбу</button></div>
+</div><div class="seal-foot">Все изображения пломб и колпаков условны. Макеты не нажимаются, не активируют защиты и не воспроизводят штатные алгоритмы. Точная раскладка и маркировки будут уточняться по архивным фотографиям пульта энергоблока №4.</div></div></article>
 <article class="panel span2"><h2>ОПЕРАТИВНЫЙ ЖУРНАЛ</h2><div class="body"><div class="log" id="log"><div class="entry"><span class="time">08:00:00</span>Начало учебной смены. Тренажёр готов.</div><div class="entry"><span class="time">08:00:01</span>Проверка интерфейсных модулей завершена.</div><div class="entry"><span class="time">08:00:02</span>Все показания являются условными.</div></div></div></article>
 <article class="panel"><h2>ДЕЙСТВИЯ СМЕНЫ</h2><div class="body"><div class="actions"><button class="primary" id="accept">Принять смену</button><button id="message" class="warnbtn">Учебное сообщение</button><button id="ack">Квитировать</button></div><p class="muted" style="font-size:10px">Действия влияют только на журнал и учебные отметки интерфейса.</p></div></article></section>
 <section class="layout view" id="reactor" hidden><article class="panel span2"><h2>РЕАКТОРНЫЙ ЗАЛ · УСЛОВНОЕ ПРЕДСТАВЛЕНИЕ</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><b>СЕКТОР A</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР B</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР C</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР D</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СИСТЕМЫ КОНТРОЛЯ</b><small>СПРАВОЧНЫЙ БЛОК</small></div><div class="node"><b>АРХИВ СОБЫТИЙ</b><small>УЧЕБНЫЙ ЖУРНАЛ</small></div></div></div></div></article><article class="panel"><h2>ПРИМЕЧАНИЕ</h2><div class="body">Схема условная, не воспроизводит геометрию активной зоны, каналы, измерительные точки или реальные системы управления.</div></article></section>
