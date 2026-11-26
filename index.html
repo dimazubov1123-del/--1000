@@ -127,7 +127,7 @@
 
 .viur-seal-bank .sealed-control .seal-break,.viur-seal-bank .sealed-control .unit-activate{display:block;width:100%;margin:7px 0 0;padding:7px 4px;font:8px Consolas;letter-spacing:.3px}.viur-seal-bank .sealed-control .seal-break{background:linear-gradient(#715d3a,#302719);border-color:#b99a61;color:#f0d9a5}.viur-seal-bank .sealed-control .unit-activate:disabled{opacity:.35;cursor:not-allowed;filter:grayscale(1)}.viur-seal-bank .sealed-control.seal-broken .seal-tag{background:#633a2c;color:#ffd0b8;border-color:#b86c50}.viur-seal-bank .sealed-control.seal-broken .cap:after{height:0;width:0;border:0;box-shadow:none}.viur-seal-bank .sealed-control.unit-active{border-color:#c58b54!important;box-shadow:inset 0 0 18px #9c653522,0 0 10px #d09a4a44!important}.viur-seal-bank .sealed-control.unit-active .unit-state{color:#f1c77d}.decor-toggle{cursor:pointer;user-select:none}.decor-toggle:focus-visible{outline:2px solid #c4dfa9;outline-offset:2px}.decor-toggle.demo-on span{background:#caa85c;box-shadow:0 0 10px #d7b65e}
 
-/* Интерактивная учебная секция ВИУР — все шкалы условные, не связаны с реактором */
+/* Интерактивная оперативн секция ВИУР — все шкалы расчётн, не связаны с реактором */
 .viur-sim-section{margin-top:12px;border:2px solid #87917a;background:linear-gradient(145deg,#283329,#111813);padding:12px;box-shadow:inset 0 2px 8px #0009}
 .viur-sim-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px;font:10px Consolas;letter-spacing:1px;color:#e0e5d8}
 .sim-tag{font:8px Consolas;color:#e7d49d;border:1px solid #8d7950;padding:4px 7px}
@@ -156,76 +156,123 @@
 .sim-status{font:8px Consolas;color:#d7dcbf;margin-top:8px;padding:7px;background:#0b120d;border:1px solid #52604d}
 @media(max-width:700px){.viur-sim-grid{grid-template-columns:1fr}.sim-gauges{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:420px){.sim-gauges{grid-template-columns:1fr 1fr}}
+
+.skala-panel{margin:12px 0;background:linear-gradient(145deg,#263128,#0b100c);border:2px solid #849078;padding:12px;box-shadow:inset 0 0 12px #000}
+.skala-head{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#e1e6d9;margin-bottom:10px}
+.skala-head h3{font: bold 15px Consolas,monospace;letter-spacing:2px;margin:0 0 4px}
+.skala-head span{font:8px Consolas;color:#aeb9a4;letter-spacing:1px}
+.skala-online{font:9px Consolas;color:#b7d49d;white-space:nowrap}
+.skala-online i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9cc77b;box-shadow:0 0 8px #9c7}
+.skala-screen{background:#07100b;border:1px solid #72816b;padding:10px;color:#b9d7a4;font:10px Consolas,monospace;box-shadow:inset 0 0 15px #000}
+.skala-screen-top{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #45563f;padding-bottom:7px;color:#d8dfc8;font-size:9px}
+.skala-status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}
+.skala-status-grid>div{background:#101c13;border:1px solid #40533c;padding:8px;min-width:0}
+.skala-status-grid small{display:block;font-size:7px;color:#8da187;margin-bottom:5px}
+.skala-status-grid b{font-size:10px;color:#c3dca9}
+.skala-terminal{height:116px;overflow:auto;background:#030805;border:1px solid #293b2a;padding:8px;line-height:1.8;color:#b3c5a8}
+.skala-terminal div{white-space:normal}
+.skala-terminal span{color:#82927a;margin-right:8px}
+.skala-controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.skala-controls button{font:8px Consolas;padding:8px 10px;background:#303b2f;border:1px solid #87937b;color:#e2e6d9;cursor:pointer}
+.skala-controls button:active{transform:translateY(1px);background:#596b4e}
+.skala-foot{margin-top:8px;padding:7px;background:#0a100b;border:1px solid #4e5c49;color:#c2d0b5;font:8px Consolas}
+@media(max-width:600px){.skala-status-grid{grid-template-columns:repeat(2,1fr)}.skala-head{align-items:flex-start;flex-direction:column}}
 </style></head><body>
-<header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · РБМК-1000 · ИСТОРИЧЕСКАЯ УЧЕБНАЯ СИМУЛЯЦИЯ</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · УЧЕБНЫЙ РЕЖИМ</div></div></header>
-<div class="warning"><b>УЧЕБНЫЙ МАКЕТ.</b> Показания, схемы и события условны. Это не точная копия штатного БЩУ, не цифровой двойник и не руководство по эксплуатации реального РБМК.</div>
+<header><div class="brand"><div class="seal">ЧАЭС<br>БЛОК 4</div><div><h1>БЛОЧНЫЙ ЩИТ УПРАВЛЕНИЯ</h1><div class="sub">ЧЕРНОБЫЛЬСКАЯ АЭС · ЭНЕРГОБЛОК №4 · РБМК-1000</div></div></div><div><div class="clock" id="clock">08:00:00</div><div class="date">26 АПРЕЛЯ 1986 · ДЕЖУРНАЯ СМЕНА</div></div></header>
+
 <main><nav class="tabs"><button class="active" data-tab="overview">ОБЗОР БЩУ</button><button data-tab="reactor">РЕАКТОРНЫЙ ЗАЛ</button><button data-tab="turbine">ТУРБИННЫЙ ЗАЛ</button><button data-tab="shift">РАБОЧАЯ СМЕНА</button></nav>
 <section class="layout view" id="overview">
-<article class="panel span2"><h2>ОБОБЩЁННАЯ МНЕМОСХЕМА · УСЛОВНО</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><i class="lamp"></i><b>РЕАКТОРНЫЙ БЛОК</b><small>ВИРТУАЛЬНЫЙ ОБЪЕКТ</small></div><div class="node"><i class="lamp"></i><b>ЦИРКУЛЯЦИОННЫЙ КОНТУР</b><small>ИНДИКАЦИЯ: НОРМА</small></div><div class="node"><i class="lamp"></i><b>ПАРОВОЙ ТРАКТ</b><small>ИНДИКАЦИЯ: НОРМА</small></div><div class="node"><i class="lamp"></i><b>КОНТРОЛЬ И ЗАЩИТА</b><small>ОТОБРАЖЕНИЕ АКТИВНО</small></div><div class="node"><i class="lamp"></i><b>ТУРБОАГРЕГАТЫ</b><small>ТА-1 / ТА-2 · МОДЕЛЬ</small></div><div class="node"><i class="lamp"></i><b>ЭЛЕКТРОСНАБЖЕНИЕ</b><small>ИНДИКАЦИЯ: НОРМА</small></div></div></div></div></article>
-<article class="panel" id="summaryPanel"><h2>СВОДНЫЕ ПОКАЗАТЕЛИ МОДЕЛИ</h2><div class="body"><div class="metrics"><div class="metric"><label>ИНДЕКС НАГРУЗКИ</label><div class="val">72.0</div><span class="unit">усл. ед.</span></div><div class="metric"><label>ТЕПЛОВОЙ БАЛАНС</label><div class="val">68.4</div><span class="unit">усл. ед.</span></div><div class="metric"><label>ДОСТУПНОСТЬ</label><div class="val">98%</div><span class="unit">условная оценка</span></div><div class="metric"><label>СООБЩЕНИЯ</label><div class="val" id="alarms">00</div><span class="unit">активные</span></div></div></div></article>
-<article class="panel"><h2>КОНТРОЛЬНЫЕ ИНДИКАТОРЫ</h2><div class="body"><div class="gauges"><div class="gauge"><div class="dial"><b>72%</b></div><small>ИНДЕКС НАГРУЗКИ</small></div><div class="gauge"><div class="dial"><b>68%</b></div><small>ТЕПЛОВОЙ БАЛАНС</small></div><div class="gauge"><div class="dial"><b>96%</b></div><small>ГОТОВНОСТЬ МОДЕЛИ</small></div><div class="gauge"><div class="dial"><b>00</b></div><small>ТРЕВОГИ</small></div></div></div></article>
-<article class="panel"><h2>СОСТОЯНИЕ ПОДСИСТЕМ</h2><div class="body"><div class="status"><span><i class="dot"></i>Мнемосхема блока</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Циркуляционная модель</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №1</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №2</span><b>НОРМА</b></div><div class="status"><span><i class="dot amber"></i>Историческая справка</span><b>ДОСТУПНА</b></div></div></article>
+<article class="panel span2"><h2>МНЕМОСХЕМА ЭНЕРГОБЛОКА №4</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><i class="lamp"></i><b>РЕАКТОРНЫЙ БЛОК</b><small>ЭНЕРГОБЛОК №4</small></div><div class="node"><i class="lamp"></i><b>ЦИРКУЛЯЦИОННЫЙ КОНТУР</b><small>ИНДИКАЦИЯ: НОРМА</small></div><div class="node"><i class="lamp"></i><b>ПАРОВОЙ ТРАКТ</b><small>ИНДИКАЦИЯ: НОРМА</small></div><div class="node"><i class="lamp"></i><b>КОНТРОЛЬ И ЗАЩИТА</b><small>ОТОБРАЖЕНИЕ АКТИВНО</small></div><div class="node"><i class="lamp"></i><b>ТУРБОАГРЕГАТЫ</b><small>ТА-1 / ТА-2</small></div><div class="node"><i class="lamp"></i><b>ЭЛЕКТРОСНАБЖЕНИЕ</b><small>ИНДИКАЦИЯ: НОРМА</small></div></div></div></div></article>
+<article class="panel" id="summaryPanel"><h2>СВОДНЫЕ ПОКАЗАТЕЛИ БЛОКА</h2><div class="body"><div class="metrics"><div class="metric"><label>ИНДЕКС НАГРУЗКИ</label><div class="val">72.0</div><span class="unit">ед.</span></div><div class="metric"><label>ТЕПЛОВОЙ БАЛАНС</label><div class="val">68.4</div><span class="unit">ед.</span></div><div class="metric"><label>ДОСТУПНОСТЬ</label><div class="val">98%</div><span class="unit">текущая оценка</span></div><div class="metric"><label>СООБЩЕНИЯ</label><div class="val" id="alarms">00</div><span class="unit">активные</span></div></div></div></article>
+<article class="panel"><h2>КОНТРОЛЬНЫЕ ИНДИКАТОРЫ</h2><div class="body"><div class="gauges"><div class="gauge"><div class="dial"><b>72%</b></div><small>ИНДЕКС НАГРУЗКИ</small></div><div class="gauge"><div class="dial"><b>68%</b></div><small>ТЕПЛОВОЙ БАЛАНС</small></div><div class="gauge"><div class="dial"><b>96%</b></div><small>ГОТОВНОСТЬ СИСТЕМ</small></div><div class="gauge"><div class="dial"><b>00</b></div><small>ТРЕВОГИ</small></div></div></div></article>
+<article class="panel"><h2>СОСТОЯНИЕ ПОДСИСТЕМ</h2><div class="body"><div class="status"><span><i class="dot"></i>Мнемосхема блока</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Циркуляционный контур</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №1</span><b>НОРМА</b></div><div class="status"><span><i class="dot"></i>Турбоагрегат №2</span><b>НОРМА</b></div><div class="status"><span><i class="dot amber"></i>АРХИВ БЩУ-4</span><b>ДОСТУПНА</b></div></div></article>
 
-<article class="panel full"><h2>ЗВУКОВАЯ СРЕДА БЩУ · УЧЕБНАЯ АУДИОСИСТЕМА</h2><div class="body"><div class="audio-grid">
-<div class="audio-card"><h3>АТМОСФЕРА ПОМЕЩЕНИЯ</h3><div class="audio-state"><i class="audio-led" id="ambientLed"></i><span id="audioState">Звук выключен</span></div><p>Синтезированная акустическая стилизация: сетевой гул, вентиляция, редкие механические щелчки. Не архивная запись.</p><div class="audio-actions"><button class="primary" id="audioStart">Включить звук</button><button id="audioStop">Остановить</button></div></div>
-<div class="audio-card"><h3>УЧЕБНЫЕ СИГНАЛЫ</h3><p>Три разных учебных звуковых эффекта. Их тембры не выдаются за подлинную сигнализацию БЩУ-4.</p><div class="audio-actions"><button id="testInfo">Сообщение</button><button class="warnbtn" id="testWarning">Предупреждение</button><button class="warnbtn" id="testAlarm">Тревога</button><button id="stopAlarm">Стоп сигнала</button></div></div>
-<div class="audio-card"><h3>МИКШЕР ГРОМКОСТИ</h3><div class="audio-row"><label for="ambVol">Фоновая атмосфера</label><span id="ambVal">35%</span></div><input id="ambVol" type="range" min="0" max="100" value="35" aria-label="Громкость фоновой атмосферы"><div class="audio-row"><label for="sigVol">Сигналы и тревоги</label><span id="sigVal">65%</span></div><input id="sigVol" type="range" min="0" max="100" value="65" aria-label="Громкость сигналов и тревог"><div class="audio-note">Звук формируется браузером. Для воспроизведения требуется включить аудиосистему.</div></div>
+<article class="panel full"><h2>АКУСТИЧЕСКАЯ СРЕДА БЩУ</h2><div class="body"><div class="audio-grid">
+<div class="audio-card"><h3>АТМОСФЕРА ПОМЕЩЕНИЯ</h3><div class="audio-state"><i class="audio-led" id="ambientLed"></i><span id="audioState">Звук выключен</span></div><p>Фоновый гул помещения, вентиляция и работа аппаратуры.</p><div class="audio-actions"><button class="primary" id="audioStart">Включить звук</button><button id="audioStop">Остановить</button></div></div>
+<div class="audio-card"><h3>СИГНАЛИЗАЦИЯ</h3><p>Сигналы сообщения, предупреждения и тревоги.</p><div class="audio-actions"><button id="testInfo">Сообщение</button><button class="warnbtn" id="testWarning">Предупреждение</button><button class="warnbtn" id="testAlarm">Тревога</button><button id="stopAlarm">Стоп сигнала</button></div></div>
+<div class="audio-card"><h3>МИКШЕР ГРОМКОСТИ</h3><div class="audio-row"><label for="ambVol">Фоновая атмосфера</label><span id="ambVal">35%</span></div><input id="ambVol" type="range" min="0" max="100" value="35" aria-label="Громкость фоновой атмосферы"><div class="audio-row"><label for="sigVol">Сигналы и тревоги</label><span id="sigVal">65%</span></div><input id="sigVol" type="range" min="0" max="100" value="65" aria-label="Громкость сигналов и тревог"><div class="audio-note">Для прослушивания включите акустическую систему.</div></div>
 </div></div></article>
 
-<article class="panel full"><h2>ПАНОРАМА БЩУ · ОПЕРАТОРСКАЯ ЗОНА · ИСТОРИЧЕСКИ СТИЛИЗОВАННЫЙ МАКЕТ</h2><div class="body">
+<article class="panel full"><h2>БЩУ-4 · ОПЕРАТОРСКИЙ ЗАЛ</h2><div class="body">
 <div class="control-room">
-<div class="room-caption"><span>ЩИТЫ И ИНФОРМАЦИОННЫЕ ПАНЕЛИ</span><span>УЧЕБНАЯ РЕКОНСТРУКЦИЯ · НЕ ШТАТНАЯ СХЕМА</span></div>
+<div class="room-caption"><span>ЩИТЫ И ИНФОРМАЦИОННЫЕ ПАНЕЛИ</span><span>ОПЕРАТОРСКИЕ ПАНЕЛИ · БЛОК 4</span></div>
 <div class="room-wall">
 <div class="wall-bank"><h3>СЕКЦИЯ ИНДИКАЦИИ · А</h3><div class="wall-lamp "><i></i>КАНАЛ 01</div><div class="wall-lamp "><i></i>КАНАЛ 02</div><div class="wall-lamp "><i></i>КАНАЛ 03</div><div class="wall-lamp "><i></i>КАНАЛ 04</div><div class="wall-lamp "><i></i>КАНАЛ 05</div><div class="wall-lamp amber"><i></i>КАНАЛ 06</div><div class="wall-lamp "><i></i>КАНАЛ 07</div><div class="wall-lamp "><i></i>КАНАЛ 08</div><div class="wall-lamp "><i></i>КАНАЛ 09</div><div class="wall-lamp "><i></i>КАНАЛ 10</div><div class="wall-lamp "><i></i>КАНАЛ 11</div><div class="wall-lamp "><i></i>КАНАЛ 12</div></div>
 <div class="wall-bank"><h3>СЕКЦИЯ СООБЩЕНИЙ · Б</h3><div class="wall-lamp "><i></i>ТАБЛО 01</div><div class="wall-lamp "><i></i>ТАБЛО 02</div><div class="wall-lamp amber"><i></i>ТАБЛО 03</div><div class="wall-lamp "><i></i>ТАБЛО 04</div><div class="wall-lamp "><i></i>ТАБЛО 05</div><div class="wall-lamp "><i></i>ТАБЛО 06</div><div class="wall-lamp "><i></i>ТАБЛО 07</div><div class="wall-lamp "><i></i>ТАБЛО 08</div></div>
 <div class="wall-bank"><h3>ОБЩИЕ ИНДИКАТОРЫ · В</h3><div class="wall-lamp "><i></i>СТАТУС 01</div><div class="wall-lamp "><i></i>СТАТУС 02</div><div class="wall-lamp "><i></i>СТАТУС 03</div><div class="wall-lamp "><i></i>СТАТУС 04</div><div class="wall-lamp "><i></i>СТАТУС 05</div><div class="wall-lamp "><i></i>СТАТУС 06</div><div class="wall-lamp "><i></i>СТАТУС 07</div><div class="wall-lamp red"><i></i>СТАТУС 08</div></div>
 </div>
 <div class="console-row">
-<div class="operator-console viur-console"><div class="viur-topline"><div><h3>ПУЛЬТ 01 · ВИУР</h3><div class="role">СТАРШИЙ ИНЖЕНЕР УПРАВЛЕНИЯ РЕАКТОРОМ · ВИЗУАЛЬНАЯ РЕКОНСТРУКЦИЯ</div></div><span class="panel-stamp">БЛОК 4<br>1986</span></div>
+<div class="operator-console viur-console"><div class="viur-topline"><div><h3>ПУЛЬТ 01 · ВИУР</h3><div class="role">ВЕДУЩИЙ ИНЖЕНЕР УПРАВЛЕНИЯ РЕАКТОРОМ</div></div><span class="panel-stamp">БЛОК 4<br>1986</span></div>
 
 <div class="viur-face">
 <div class="viur-bank bank-wide" id="viurMeters"><div class="bank-title">ПРИБОРНОЕ ПОЛЕ · ЛЕВАЯ СЕКЦИЯ</div><div class="meter-row"><div class="round-meter"><i></i><b>72</b><small>ШКАЛА А</small></div><div class="round-meter"><i></i><b>64</b><small>ШКАЛА Б</small></div><div class="round-meter"><i></i><b>81</b><small>ШКАЛА В</small></div></div><div class="indicator-grid"><div class="viur-indicator"><i></i><span>ИНД. 01</span></div><div class="viur-indicator"><i></i><span>ИНД. 02</span></div><div class="viur-indicator"><i></i><span>ИНД. 03</span></div><div class="viur-indicator"><i></i><span>ИНД. 04</span></div><div class="viur-indicator"><i></i><span>ИНД. 05</span></div><div class="viur-indicator"><i></i><span>ИНД. 06</span></div><div class="viur-indicator"><i></i><span>ИНД. 07</span></div><div class="viur-indicator"><i></i><span>ИНД. 08</span></div><div class="viur-indicator"><i></i><span>ИНД. 09</span></div><div class="viur-indicator"><i></i><span>ИНД. 10</span></div><div class="viur-indicator"><i></i><span>ИНД. 11</span></div><div class="viur-indicator"><i></i><span>ИНД. 12</span></div></div></div>
 <div class="viur-bank" id="viurIndicators"><div class="bank-title">ИНДИКАЦИОННЫЕ ПОЛЯ</div><div class="digital-stack"><div><small>ПОКАЗАНИЕ 01</small><b>72.0</b></div><div><small>ПОКАЗАНИЕ 02</small><b>68.4</b></div><div><small>СОСТОЯНИЕ</small><b>НОРМА</b></div></div><div class="toggle-grid"><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 01</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 02</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 03</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 04</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 05</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 06</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 07</small></div><div class="decor-toggle"><span></span><small>ПЕРЕКЛ. 08</small></div></div></div>
-<div class="viur-bank" id="viurSignals"><div class="bank-title">СИГНАЛЬНОЕ ПОЛЕ</div><div class="signal-grid"><div class="signal-tile"><i></i><small>ТАБЛО 01</small></div><div class="signal-tile"><i></i><small>ТАБЛО 02</small></div><div class="signal-tile"><i></i><small>ТАБЛО 03</small></div><div class="signal-tile"><i></i><small>ТАБЛО 04</small></div><div class="signal-tile"><i></i><small>ТАБЛО 05</small></div><div class="signal-tile"><i></i><small>ТАБЛО 06</small></div><div class="signal-tile"><i></i><small>ТАБЛО 07</small></div><div class="signal-tile"><i></i><small>ТАБЛО 08</small></div><div class="signal-tile"><i></i><small>ТАБЛО 09</small></div><div class="signal-tile"><i></i><small>ТАБЛО 10</small></div></div><div class="blank-plate">СЛУЖЕБНАЯ ПАНЕЛЬ<br><b id="reserveState">УЧЕБНЫЙ МАКЕТ</b></div></div>
-<div class="viur-bank viur-seal-bank" id="viurSeals"><div class="bank-title">УЧЕБНЫЕ МАКЕТЫ · ПЛОМБЫ И ДЕМОНСТРАЦИОННЫЕ КНОПКИ</div>
-<div class="sealed-control" data-demo-unit="АЗ-5"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>АЗ-5</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗ-5">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗ-5" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
-<div class="sealed-control" data-demo-unit="АЗ-3"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>АЗ-3</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗ-3">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗ-3" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
-<div class="sealed-control" data-demo-unit="АЗС"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>АЗС</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗС">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗС" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
-<div class="sealed-control" data-demo-unit="ПИТ-МУФТ"><span class="seal-tag">ПЛОМБА ЦЕЛА</span><div class="cap"></div><b>ПИТ-МУФТ</b><small class="unit-state">УЧЕБНЫЙ МАКЕТ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="ПИТ-МУФТ">СОРВАТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="ПИТ-МУФТ" disabled>ДЕМО-АКТИВАЦИЯ</button></div>
-<div class="sealed-note">Срыв пломбы и активация меняют только состояние игрового макета, подсветку и журнал. Это не штатные органы и не модель систем защиты реактора.</div></div>
+<div class="viur-bank" id="viurSignals"><div class="bank-title">СИГНАЛЬНОЕ ПОЛЕ</div><div class="signal-grid"><div class="signal-tile"><i></i><small>ТАБЛО 01</small></div><div class="signal-tile"><i></i><small>ТАБЛО 02</small></div><div class="signal-tile"><i></i><small>ТАБЛО 03</small></div><div class="signal-tile"><i></i><small>ТАБЛО 04</small></div><div class="signal-tile"><i></i><small>ТАБЛО 05</small></div><div class="signal-tile"><i></i><small>ТАБЛО 06</small></div><div class="signal-tile"><i></i><small>ТАБЛО 07</small></div><div class="signal-tile"><i></i><small>ТАБЛО 08</small></div><div class="signal-tile"><i></i><small>ТАБЛО 09</small></div><div class="signal-tile"><i></i><small>ТАБЛО 10</small></div></div><div class="blank-plate">СЛУЖЕБНАЯ ПАНЕЛЬ<br><b id="reserveState">СОСТОЯНИЕ ПАНЕЛИ</b></div></div>
+<div class="viur-bank viur-seal-bank" id="viurSeals"><div class="bank-title">ПЛОМБИРУЕМЫЕ ОРГАНЫ И УЗЛЫ</div>
+<div class="sealed-control" data-demo-unit="АЗ-5"><span class="seal-tag">ПЛОМБА НЕ НАРУШЕНА</span><div class="cap"></div><b>АЗ-5</b><small class="unit-state">СОСТОЯНИЕ ПАНЕЛИ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗ-5">СНЯТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗ-5" disabled>ОТМЕТИТЬ СОБЫТИЕ</button></div>
+<div class="sealed-control" data-demo-unit="АЗ-3"><span class="seal-tag">ПЛОМБА НЕ НАРУШЕНА</span><div class="cap"></div><b>АЗ-3</b><small class="unit-state">СОСТОЯНИЕ ПАНЕЛИ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗ-3">СНЯТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗ-3" disabled>ОТМЕТИТЬ СОБЫТИЕ</button></div>
+<div class="sealed-control" data-demo-unit="АЗС"><span class="seal-tag">ПЛОМБА НЕ НАРУШЕНА</span><div class="cap"></div><b>АЗС</b><small class="unit-state">СОСТОЯНИЕ ПАНЕЛИ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="АЗС">СНЯТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="АЗС" disabled>ОТМЕТИТЬ СОБЫТИЕ</button></div>
+<div class="sealed-control" data-demo-unit="ПИТ-МУФТ"><span class="seal-tag">ПЛОМБА НЕ НАРУШЕНА</span><div class="cap"></div><b>ПИТ-МУФТ</b><small class="unit-state">СОСТОЯНИЕ ПАНЕЛИ · ЗАЩИЩЁН</small><button type="button" class="seal-break" data-break-seal="ПИТ-МУФТ">СНЯТЬ ПЛОМБУ</button><button type="button" class="unit-activate" data-activate-unit="ПИТ-МУФТ" disabled>ОТМЕТИТЬ СОБЫТИЕ</button></div>
+<div class="sealed-note">Сведения о снятии пломбы и действиях смены заносятся в оперативный журнал.</div></div>
 </div>
 <section class="viur-sim-section" id="viurSim">
- <div class="viur-sim-head"><span>ДОПОЛНИТЕЛЬНОЕ ПРИБОРНОЕ ПОЛЕ · ВИУР</span><span class="sim-tag">УЧЕБНАЯ МОДЕЛЬ</span></div>
+ <div class="viur-sim-head"><span>ПРИБОРНОЕ ПОЛЕ · ВИУР</span><span class="sim-tag">СМЕННЫЕ ПОКАЗАНИЯ</span></div>
  <div class="viur-sim-grid">
   <div class="sim-card">
-   <h4>АНАЛОГОВЫЕ УКАЗАТЕЛИ · УСЛОВНЫЕ ШКАЛЫ</h4>
+   <h4>АНАЛОГОВЫЕ ПРИБОРЫ</h4>
    <div class="sim-gauges">
-    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle1"></i></div><b id="simGauge1">52</b><small>ДАВЛЕНИЕ · УСЛ. ЕД.</small></div>
-    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle2"></i></div><b id="simGauge2">67</b><small>ТЕМПЕРАТУРА · УСЛ. ЕД.</small></div>
-    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle3"></i></div><b id="simGauge3">43</b><small>РАСХОД · УСЛ. ЕД.</small></div>
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle1"></i></div><b id="simGauge1">52</b><small>ДАВЛЕНИЕ</small></div>
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle2"></i></div><b id="simGauge2">67</b><small>ТЕМПЕРАТУРА</small></div>
+    <div class="sim-gauge"><div class="sim-dial"><i class="sim-needle" id="simNeedle3"></i></div><b id="simGauge3">43</b><small>РАСХОД</small></div>
    </div>
    <div class="sim-readouts">
     <div class="sim-readout">КАНАЛ ИЗМЕРЕНИЯ A<b id="simReadA">СТАБИЛЕН</b></div>
     <div class="sim-readout">КАНАЛ ИЗМЕРЕНИЯ B<b id="simReadB">СТАБИЛЕН</b></div>
-    <div class="sim-readout">СВЯЗЬ С МОДЕЛЬЮ<b>ОТСУТСТВУЕТ</b></div>
-    <div class="sim-readout">ТИП ПОКАЗАНИЙ<b>ИГРОВЫЕ</b></div>
+    <div class="sim-readout">СВЯЗЬ С ВЫЧИСЛИТЕЛЬНЫМ КОМПЛЕКСОМ<b>НЕТ ДАННЫХ</b></div>
+    <div class="sim-readout">РЕЖИМ ИНДИКАЦИИ<b>ТЕКУЩИЙ</b></div>
    </div>
   </div>
   <div class="sim-card">
-   <h4>ИНДИКАТОРЫ ПОЛОЖЕНИЯ · ДЕМОНСТРАЦИОННЫЕ ГРУППЫ</h4>
+   <h4>УКАЗАТЕЛИ ПОЛОЖЕНИЯ · ГРУППЫ</h4>
    <div class="group-controls">
     <div class="group-row"><label><span>ГРУППА A · УКАЗАТЕЛЬ</span><b id="groupValA">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="A"><div class="group-track"><div class="group-fill" id="groupFillA"></div></div></div>
     <div class="group-row"><label><span>ГРУППА B · УКАЗАТЕЛЬ</span><b id="groupValB">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="B"><div class="group-track"><div class="group-fill" id="groupFillB"></div></div></div>
     <div class="group-row"><label><span>ГРУППА C · УКАЗАТЕЛЬ</span><b id="groupValC">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="C"><div class="group-track"><div class="group-fill" id="groupFillC"></div></div></div>
     <div class="group-row"><label><span>ГРУППА D · УКАЗАТЕЛЬ</span><b id="groupValD">50%</b></label><input type="range" min="0" max="100" value="50" data-sim-group="D"><div class="group-track"><div class="group-fill" id="groupFillD"></div></div></div>
    </div>
-   <div class="group-controls-note">Ползунки двигают только графические указатели вымышленных групп. Они не соответствуют реальным стержням, глубине погружения, каналам, приводам или режимам РБМК.</div>
-   <div class="sim-actions"><button type="button" id="simLampTest">ПРОВЕРКА ИНДИКАЦИИ</button><button type="button" id="simReset">СБРОС МАКЕТА</button></div>
-   <div class="sim-status" id="simStatus" aria-live="polite">МАКЕТ ГОТОВ · ФИЗИЧЕСКОЙ МОДЕЛИ РЕАКТОРА НЕТ</div>
+   <div class="group-controls-note">Перемещение указателей отображается на лицевой панели и фиксируется в журнале смены.</div>
+   <div class="sim-actions"><button type="button" id="simLampTest">КОНТРОЛЬ ЛАМП</button><button type="button" id="simReset">ВОЗВРАТ ПОКАЗАНИЙ</button></div>
+   <div class="sim-status" id="simStatus" aria-live="polite">ПРИБОРНОЕ ПОЛЕ ГОТОВО</div>
   </div>
  </div>
 </section>
-<div class="viur-lower"><div class="lower-label">НИЖНЯЯ ПАНЕЛЬ · ИНТЕРАКТИВНЫЕ КНОПКИ ИНТЕРФЕЙСА</div><button type="button" class="dummy-button" data-console-action="control">КОНТРОЛЬ</button><button type="button" class="dummy-button" data-console-action="overview">ОБЗОР</button><button type="button" class="dummy-button" data-console-action="summary">СВОДКА</button><button type="button" class="dummy-button" data-console-action="archive">АРХИВ</button><button type="button" class="dummy-button" data-console-action="comms">СВЯЗЬ</button><button type="button" class="dummy-button" data-console-action="reserve">РЕЗЕРВ</button><button type="button" class="dummy-button" data-console-action="indicators">ИНДИКАЦИЯ</button><div class="viur-action-status" id="viurActionStatus" role="status" aria-live="polite">ГОТОВНОСТЬ ИНТЕРФЕЙСА · ВЫБЕРИТЕ РАЗДЕЛ</div></div>
+
+<section class="skala-panel" id="skala">
+ <div class="skala-head"><div><h3>ЦВМ «СКАЛА»</h3><span>ЦЕНТРАЛЬНАЯ СИСТЕМА КОНТРОЛЯ И ИНФОРМАЦИИ · БЛОК №4</span></div><b class="skala-online"><i></i> СВЯЗЬ УСТАНОВЛЕНА</b></div>
+ <div class="skala-screen">
+  <div class="skala-screen-top"><span>СКАЛА / ИНФОРМАЦИОННЫЙ КОМПЛЕКС</span><span id="skalaClock">08:00:00</span></div>
+  <div class="skala-status-grid">
+   <div><small>ВЫЧИСЛИТЕЛЬНЫЙ КОМПЛЕКС</small><b id="skalaCpu">ГОТОВ</b></div>
+   <div><small>ОБМЕН ДАННЫМИ</small><b id="skalaExchange">УСТАНОВЛЕН</b></div>
+   <div><small>АРХИВ СООБЩЕНИЙ</small><b id="skalaArchive">ДОСТУПЕН</b></div>
+   <div><small>СОСТОЯНИЕ СИСТЕМЫ</small><b id="skalaState">РАБОТА</b></div>
+  </div>
+  <div class="skala-terminal" id="skalaTerminal" aria-live="polite">
+   <div><span>08:00:00</span> СКАЛА: начало сеанса связи.</div>
+   <div><span>08:00:01</span> СКАЛА: информационный обмен установлен.</div>
+   <div><span>08:00:02</span> СКАЛА: архив сообщений доступен.</div>
+   <div><span>08:00:03</span> СКАЛА: ожидается запрос оператора.</div>
+  </div>
+ </div>
+ <div class="skala-controls">
+  <button type="button" id="skalaSummary">ЗАПРОС СВОДКИ</button>
+  <button type="button" id="skalaCheck">КОНТРОЛЬ ИНДИКАЦИИ</button>
+  <button type="button" id="skalaMessages">АРХИВ СООБЩЕНИЙ</button>
+  <button type="button" id="skalaAck">КВИТИРОВАТЬ</button>
+ </div>
+ <div class="skala-foot" id="skalaFoot">СКАЛА · СЕАНС ОТКРЫТ · ОЖИДАНИЕ КОМАНДЫ</div>
+</section>
+<div class="viur-lower"><div class="lower-label">НИЖНИЙ РЯД ОРГАНОВ ВЫЗОВА</div><button type="button" class="dummy-button" data-console-action="control">КОНТРОЛЬ</button><button type="button" class="dummy-button" data-console-action="overview">ОБЗОР</button><button type="button" class="dummy-button" data-console-action="summary">СВОДКА</button><button type="button" class="dummy-button" data-console-action="archive">АРХИВ</button><button type="button" class="dummy-button" data-console-action="comms">СВЯЗЬ</button><button type="button" class="dummy-button" data-console-action="reserve">РЕЗЕРВ</button><button type="button" class="dummy-button" data-console-action="indicators">ИНДИКАЦИЯ</button><div class="viur-action-status" id="viurActionStatus" role="status" aria-live="polite">ВЫБЕРИТЕ НЕОБХОДИМЫЙ РАЗДЕЛ</div></div>
 <details class="viur-archive-details" id="viurArchive"><summary>АРХИВНЫЕ ФОТОГРАФИИ И ИСТОЧНИКИ · БЩУ-4</summary><div class="viur-archive">
  <div class="viur-archive-head"><span>АРХИВНЫЕ ФОТОГРАФИИ · БЩУ-4</span><a href="https://www.svoboda.org/a/28118262.html" target="_blank" rel="noopener">ОТКРЫТЬ ФОТОРЕПОРТАЖ ↗</a></div>
  <div class="viur-archive-grid">
@@ -233,21 +280,21 @@
   <figure class="viur-archive-shot"><a href="https://gdb.rferl.org/F3352C53-6B97-4DE5-BAC2-94ADEFE4F45B_w1500.jpg" target="_blank" rel="noopener"><img src="https://gdb.rferl.org/F3352C53-6B97-4DE5-BAC2-94ADEFE4F45B_w1500.jpg" alt="Рабочее место старшего инженера управления блоком" loading="lazy"></a><figcaption><b>РАБОЧЕЕ МЕСТО ИНЖЕНЕРА</b>Отдельный пульт БЩУ-4; не подтверждён как точная фотография ВИУРа.</figcaption></figure>
   <figure class="viur-archive-shot"><a href="https://gdb.rferl.org/28CC62AB-CE1F-40CB-8489-C59970DBC877_w1500.jpg" target="_blank" rel="noopener"><img src="https://gdb.rferl.org/28CC62AB-CE1F-40CB-8489-C59970DBC877_w1500.jpg" alt="Операторы за пультом БЩУ-4" loading="lazy"></a><figcaption><b>ОПЕРАТОРСКАЯ ЗОНА</b>Исторический вид рабочего места и общего оформления пультов.</figcaption></figure>
  </div>
- <div class="viur-archive-note">Это фотоматериалы о БЩУ-4, а не доказанная схема компоновки именно ВИУРа. Изображения используются как исторические визуальные ориентиры; текущая интерактивная панель ниже остаётся условной игровой реконструкцией.</div>
+ <div class="viur-archive-note">Это фотоматериалы о БЩУ-4, а не доказанная схема компоновки именно ВИУРа. Изображения используются как исторические визуальные ориентиры; текущая интерактивная панель ниже остаётся расчётн сменн реконструкцией.</div>
 </div>
 </details>
-<div class="console-foot">ДЕТАЛИЗИРОВАННЫЙ ВНЕШНИЙ МАКЕТ. Маркировка и компоновка условны; функциональные цепи, реальные назначения органов управления и рабочая логика не воспроизводятся.</div></div>
-<div class="operator-console"><h3>ПУЛЬТ 02 · ВИУТ</h3><div class="role">ТУРБИННОЕ ХОЗЯЙСТВО · УЧЕБНЫЙ МАКЕТ</div><div class="console-face"><div class="mini-meter">ТА-1<small>СТАТУС</small></div><div class="mini-meter">ТА-2<small>СТАТУС</small></div><div class="mini-meter">98<small>ИНДЕКС</small></div><div class="mini-meter">НОРМ<small>СВОДКА</small></div><div class="fake-switch">ОБЗОР</div><div class="fake-switch">СООБЩЕНИЯ</div><div class="fake-switch">ЖУРНАЛ</div><div class="fake-switch">СВЯЗЬ</div><div class="sealed-mock"><b>ЗАЩИЩЁННЫЙ МАКЕТ</b>ДЕКОРАТИВНАЯ ПЛОМБА</div><div class="sealed-mock"><b>РЕЗЕРВ</b>БЕЗ ФУНКЦИИ УПРАВЛЕНИЯ</div></div><div class="console-foot">УСЛОВНАЯ ПАНЕЛЬ ТУРБИННОГО ОПЕРАТОРА</div></div>
-<div class="operator-console"><h3>ПУЛЬТ 03 · СМЕНА</h3><div class="role">ОБЩИЕ СООБЩЕНИЯ И КООРДИНАЦИЯ</div><div class="console-face"><div class="mini-meter">08:00<small>ВРЕМЯ</small></div><div class="mini-meter">26.04<small>ДАТА</small></div><div class="mini-meter">00<small>ЗАПИСИ</small></div><div class="mini-meter">OK<small>СВЯЗЬ</small></div><div class="fake-switch">ПЕРЕГОВОРЫ</div><div class="fake-switch">СМЕНА</div><div class="fake-switch">АРХИВ</div><div class="fake-switch">СПРАВКА</div><div class="sealed-mock"><b>ПЛОМБА · УЧЕБНЫЙ ОБРАЗЕЦ</b>НЕ ЯВЛЯЕТСЯ КОПИЕЙ РЕАЛЬНОГО ОРГАНА</div><div class="sealed-mock"><b>РЕЗЕРВНЫЙ СЕКТОР</b>ДЕКОРАТИВНАЯ ИНДИКАЦИЯ</div></div><div class="console-foot">УСЛОВНОЕ РАБОЧЕЕ МЕСТО ДЛЯ СЦЕНАРИЯ СМЕНЫ</div></div>
+<div class="console-foot">ПУЛЬТ ВИУР · ЭНЕРГОБЛОК №4</div></div>
+<div class="operator-console"><h3>ПУЛЬТ 02 · ВИУТ</h3><div class="role">ТУРБИННОЕ ХОЗЯЙСТВО · СОСТОЯНИЕ ПАНЕЛИ</div><div class="console-face"><div class="mini-meter">ТА-1<small>СТАТУС</small></div><div class="mini-meter">ТА-2<small>СТАТУС</small></div><div class="mini-meter">98<small>ИНДЕКС</small></div><div class="mini-meter">НОРМ<small>СВОДКА</small></div><div class="fake-switch">ОБЗОР</div><div class="fake-switch">СООБЩЕНИЯ</div><div class="fake-switch">ЖУРНАЛ</div><div class="fake-switch">СВЯЗЬ</div><div class="sealed-mock"><b>ЗАЩИЩЁННЫЙ панель</b>ДЕКОРАТИВНАЯ ПЛОМБА</div><div class="sealed-mock"><b>РЕЗЕРВ</b>БЕЗ ФУНКЦИИ УПРАВЛЕНИЯ</div></div><div class="console-foot">ПУЛЬТ ВИУТ · ТУРБИННЫЙ ЗАЛ</div></div>
+<div class="operator-console"><h3>ПУЛЬТ 03 · СМЕНА</h3><div class="role">ОБЩИЕ СООБЩЕНИЯ И КООРДИНАЦИЯ</div><div class="console-face"><div class="mini-meter">08:00<small>ВРЕМЯ</small></div><div class="mini-meter">26.04<small>ДАТА</small></div><div class="mini-meter">00<small>ЗАПИСИ</small></div><div class="mini-meter">OK<small>СВЯЗЬ</small></div><div class="fake-switch">ПЕРЕГОВОРЫ</div><div class="fake-switch">СМЕНА</div><div class="fake-switch">АРХИВ</div><div class="fake-switch">СПРАВКА</div><div class="sealed-mock"><b>ПЛОМБА · СОСТОЯНИЕ УЗЛА</b>НЕ ЯВЛЯЕТСЯ КОПИЕЙ РЕАЛЬНОГО ОРГАНА</div><div class="sealed-mock"><b>РЕЗЕРВНЫЙ СЕКТОР</b>ДЕКОРАТИВНАЯ ИНДИКАЦИЯ</div></div><div class="console-foot">РАБОЧЕЕ МЕСТО НАЧАЛЬНИКА СМЕНЫ</div></div>
 </div>
-<div class="control-room-legend"><span>● ЗЕЛЁНЫЙ — условная штатная индикация</span><span>● ЖЁЛТЫЙ — учебное внимание</span><span>● КРАСНЫЙ — демонстрационный статус</span></div>
+<div class="control-room-legend"><span>● ЗЕЛЁНЫЙ — нормальное состояние</span><span>● ЖЁЛТЫЙ — внимание</span><span>● КРАСНЫЙ — аварийное сообщение</span></div>
 </div><div class="seal-foot">Композиция и подписи стилизованы под эпоху. Это не точная копия БЩУ-4: позиции, маркировка, сигнальные цепи и логика органов управления не воспроизводятся. Все элементы пультов декоративны.</div></div></article>
-<article class="panel span2"><h2>ОПЕРАТИВНЫЙ ЖУРНАЛ</h2><div class="body"><div class="log" id="log"><div class="entry"><span class="time">08:00:00</span>Начало учебной смены. Тренажёр готов.</div><div class="entry"><span class="time">08:00:01</span>Проверка интерфейсных модулей завершена.</div><div class="entry"><span class="time">08:00:02</span>Все показания являются условными.</div></div></div></article>
-<article class="panel"><h2>ДЕЙСТВИЯ СМЕНЫ</h2><div class="body"><div class="actions"><button class="primary" id="accept">Принять смену</button><button id="message" class="warnbtn">Учебное сообщение</button><button id="ack">Квитировать</button></div><p class="muted" style="font-size:10px">Действия влияют только на журнал и учебные отметки интерфейса.</p></div></article></section>
-<section class="layout view" id="reactor" hidden><article class="panel span2"><h2>РЕАКТОРНЫЙ ЗАЛ · УСЛОВНОЕ ПРЕДСТАВЛЕНИЕ</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><b>СЕКТОР A</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР B</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР C</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР D</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СИСТЕМЫ КОНТРОЛЯ</b><small>СПРАВОЧНЫЙ БЛОК</small></div><div class="node"><b>АРХИВ СОБЫТИЙ</b><small>УЧЕБНЫЙ ЖУРНАЛ</small></div></div></div></div></article><article class="panel"><h2>ПРИМЕЧАНИЕ</h2><div class="body">Схема условная, не воспроизводит геометрию активной зоны, каналы, измерительные точки или реальные системы управления.</div></article></section>
-<section class="layout view" id="turbine" hidden><article class="panel span2"><h2>ТУРБИННЫЙ ЗАЛ · УЧЕБНАЯ ПАНЕЛЬ</h2><div class="body"><div class="metrics"><div class="metric"><label>ТУРБОАГРЕГАТ №1</label><div class="val">ГОТОВ</div><span class="unit">условный статус</span></div><div class="metric"><label>ТУРБОАГРЕГАТ №2</label><div class="val">ГОТОВ</div><span class="unit">условный статус</span></div><div class="metric"><label>ЭЛЕКТРИЧЕСКАЯ ЧАСТЬ</label><div class="val">НОРМА</div><span class="unit">условный статус</span></div></div><p class="muted">Панель предназначена для навигации и учебных заметок; реальные режимы и последовательности управления не воспроизводятся.</p></div></article></section>
-<section class="layout view" id="shift" hidden><article class="panel span2"><h2>РАБОЧАЯ СМЕНА · ПЕРЕДАЧА ДЕЖУРСТВА</h2><div class="body"><p id="shiftstate">Смена ещё не принята.</p><textarea id="note" placeholder="Учебная запись оператора..." style="width:100%;height:100px;background:#111813;color:var(--txt);border:1px solid var(--line);padding:10px"></textarea><p><button class="primary" id="save">Добавить запись в журнал</button></p></div></article></section>
-<div class="foot"><span>УЧЕБНАЯ ВИЗУАЛИЗАЦИЯ · НЕ ШТАТНЫЙ ПУЛЬТ</span><span>ЧАЭС / ЭНЕРГОБЛОК №4 · ПРОТОТИП 0.1</span></div></main>
+<article class="panel span2"><h2>ОПЕРАТИВНЫЙ ЖУРНАЛ</h2><div class="body"><div class="log" id="log"><div class="entry"><span class="time">08:00:00</span>Дежурная смена приступила к работе.</div><div class="entry"><span class="time">08:00:01</span>Проверка интерфейсных модулей завершена.</div><div class="entry"><span class="time">08:00:02</span>Сводные показания обновлены.</div></div></div></article>
+<article class="panel"><h2>РАСПОРЯЖЕНИЯ СМЕНЫ</h2><div class="body"><div class="actions"><button class="primary" id="accept">Принять смену</button><button id="message" class="warnbtn">Новое сообщение</button><button id="ack">Квитировать</button></div><p class="muted" style="font-size:10px">Отметки действий смены заносятся в оперативный журнал.</p></div></article></section>
+<section class="layout view" id="reactor" hidden><article class="panel span2"><h2>РЕАКТОРНЫЙ ЗАЛ · БЛОК №4</h2><div class="body"><div class="mimic"><div class="nodes"><div class="node"><b>СЕКТОР A</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР B</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР C</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СЕКТОР D</b><small>ВИЗУАЛЬНЫЙ СЕГМЕНТ</small></div><div class="node"><b>СИСТЕМЫ КОНТРОЛЯ</b><small>СПРАВОЧНЫЙ БЛОК</small></div><div class="node"><b>АРХИВ СОБЫТИЙ</b><small>ОПЕРАТИВНЫЙ ЖУРНАЛ</small></div></div></div></div></article><article class="panel"><h2>ПРИМЕЧАНИЕ</h2><div class="body">Схема расчётн, не воспроизводит геометрию активной зоны, каналы, измерительные точки или реальные системы управления.</div></article></section>
+<section class="layout view" id="turbine" hidden><article class="panel span2"><h2>ТУРБИННЫЙ ЗАЛ</h2><div class="body"><div class="metrics"><div class="metric"><label>ТУРБОАГРЕГАТ №1</label><div class="val">ГОТОВ</div><span class="unit">текущее состояние</span></div><div class="metric"><label>ТУРБОАГРЕГАТ №2</label><div class="val">ГОТОВ</div><span class="unit">текущее состояние</span></div><div class="metric"><label>ЭЛЕКТРИЧЕСКАЯ ЧАСТЬ</label><div class="val">НОРМА</div><span class="unit">текущее состояние</span></div></div><p class="muted">Состояние турбинного оборудования и записи смены.</p></div></article></section>
+<section class="layout view" id="shift" hidden><article class="panel span2"><h2>РАБОЧАЯ СМЕНА · ПЕРЕДАЧА ДЕЖУРСТВА</h2><div class="body"><p id="shiftstate">Смена ещё не принята.</p><textarea id="note" placeholder="Запись в оперативный журнал..." style="width:100%;height:100px;background:#111813;color:var(--txt);border:1px solid var(--line);padding:10px"></textarea><p><button class="primary" id="save">Добавить запись в журнал</button></p></div></article></section>
+<div class="foot"><span>БЩУ-4 · ОПЕРАТИВНАЯ ИНФОРМАЦИОННАЯ СИСТЕМА</span><span>ЧАЭС / ЭНЕРГОБЛОК №4 · СМЕНА 26.04.1986</span></div></main>
 <script>
 const el=id=>document.getElementById(id);let seconds=28800,accepted=false,activeMessage=false;
 setInterval(()=>{seconds++;el('clock').textContent=[Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60].map(n=>String(n).padStart(2,'0')).join(':')},1000);
@@ -259,26 +306,26 @@ document.querySelectorAll('[data-break-seal]').forEach(button=>button.addEventLi
  if(!unit||unit.classList.contains('seal-broken'))return;
  unit.classList.add('seal-broken');
  unit.querySelector('.seal-tag').textContent='ПЛОМБА СОРВАНА';
- unit.querySelector('.unit-state').textContent='ПЛОМБА СНЯТА · ДЕМО-МАКЕТ';
+ unit.querySelector('.unit-state').textContent='ПЛОМБА СНЯТА';
  button.disabled=true;button.textContent='ПЛОМБА УЖЕ СНЯТА';
  const activate=unit.querySelector('[data-activate-unit]');if(activate)activate.disabled=false;
- addLog('УЧЕБНОЕ СОБЫТИЕ: сорвана декоративная пломба макета '+name+'. Реальные системы не затронуты.');
+ addLog('СМЕНА: снята пломба с узла '+name+'.');
  if(window.BSHUAudio)window.BSHUAudio.info();
 }));
 document.querySelectorAll('[data-activate-unit]').forEach(button=>button.addEventListener('click',()=>{
  if(button.disabled)return;
  const name=button.dataset.activateUnit,unit=button.closest('[data-demo-unit]');
  if(!unit||unit.classList.contains('unit-active'))return;
- unit.classList.add('unit-active');button.disabled=true;button.textContent='ДЕМО РЕЖИМ ВКЛЮЧЁН';
- unit.querySelector('.unit-state').textContent='АКТИВЕН · ИГРОВОЙ ЭФФЕКТ';
- const status=el('viurActionStatus');if(status)status.textContent='ДЕМО-АКТИВАЦИЯ: '+name+' · ТОЛЬКО ВИЗУАЛЬНЫЙ ЭФФЕКТ';
- addLog('УЧЕБНОЕ СОБЫТИЕ: демонстрационный макет '+name+' активирован. Изменена только индикация тренажёра.');
+ unit.classList.add('unit-active');button.disabled=true;button.textContent='СОБЫТИЕ ЗАРЕГИСТРИРОВАНО';
+ unit.querySelector('.unit-state').textContent='АКТИВЕН · сменн ЭФФЕКТ';
+ const status=el('viurActionStatus');if(status)status.textContent='ОТМЕТИТЬ СОБЫТИЕ: '+name+' · ТОЛЬКО ВИЗУАЛЬНЫЙ ЭФФЕКТ';
+ addLog('СМЕНА: зарегистрировано действие по узлу '+name+' активирован. Изменена только индикация операторская система.');
  if(window.BSHUAudio){if(name==='АЗ-5')window.BSHUAudio.alarm();else window.BSHUAudio.warning();}
  if(name==='АЗ-5')setTimeout(()=>{if(window.BSHUAudio)window.BSHUAudio.stopAlarm()},2600);
 }));
 document.querySelectorAll('.decor-toggle').forEach((toggle,index)=>{
  toggle.setAttribute('role','button');toggle.setAttribute('tabindex','0');toggle.setAttribute('aria-pressed','false');
- const flip=()=>{const on=toggle.classList.toggle('demo-on');toggle.setAttribute('aria-pressed',String(on));const label=toggle.querySelector('small')?.textContent||('ПЕРЕКЛЮЧАТЕЛЬ '+(index+1));addLog('УЧЕБНЫЙ ПЕРЕКЛЮЧАТЕЛЬ: '+label+' '+(on?'ВКЛЮЧЁН':'ВЫКЛЮЧЕН')+'.');if(window.BSHUAudio)window.BSHUAudio.info()};
+ const flip=()=>{const on=toggle.classList.toggle('demo-on');toggle.setAttribute('aria-pressed',String(on));const label=toggle.querySelector('small')?.textContent||('ПЕРЕКЛЮЧАТЕЛЬ '+(index+1));addLog('ПЕРЕКЛЮЧАТЕЛЬ: '+label+' '+(on?'ВКЛЮЧЁН':'ВЫКЛЮЧЕН')+'.');if(window.BSHUAudio)window.BSHUAudio.info()};
  toggle.addEventListener('click',flip);toggle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
 });
 
@@ -290,8 +337,8 @@ document.querySelectorAll('[data-console-action]').forEach(button=>button.addEve
  const messages={
   control:['ОТКРЫТ РАЗДЕЛ КОНТРОЛЯ · ТОЛЬКО ВИЗУАЛЬНЫЙ ОСМОТР','viurMeters'],
   overview:['ОБЗОР БЩУ · ВОЗВРАТ К ГЛАВНОЙ СТРАНИЦЕ','overview'],
-  summary:['СВОДКА МОДЕЛИ · ПОКАЗАНЫ УЧЕБНЫЕ ПОКАЗАТЕЛИ','summaryPanel'],
-  comms:['КАНАЛ СВЯЗИ · УЧЕБНАЯ ОТМЕТКА ОТКРЫТА',null]
+  summary:['СВОДКА БЛОКА · ТЕКУЩИЕ ПОКАЗАНИЯ','summaryPanel'],
+  comms:['КАНАЛ СВЯЗИ · ОТКРЫТ',null]
  };
  if(action==='archive'){
   const details=el('viurArchive');
@@ -302,14 +349,14 @@ document.querySelectorAll('[data-console-action]').forEach(button=>button.addEve
   const state=el('reserveState');
   const active=state.dataset.active!=='1';
   state.dataset.active=active?'1':'0';
-  state.textContent=active?'РЕЗЕРВ · ДЕМО-РЕЖИМ':'УЧЕБНЫЙ МАКЕТ';
+  state.textContent=active?'РЕЗЕРВ · ВКЛЮЧЁН':'СОСТОЯНИЕ ПАНЕЛИ';
   status.textContent=active?'РЕЗЕРВНЫЙ ИНДИКАТОР ВКЛЮЧЁН · БЕЗ УПРАВЛЕНИЯ':'РЕЗЕРВНЫЙ ИНДИКАТОР ВЫКЛЮЧЕН';
   addLog(status.textContent);
  }else if(action==='indicators'){
   const tiles=[...document.querySelectorAll('#viurSignals .signal-tile i')];
   const active=button.dataset.active!=='1';button.dataset.active=active?'1':'0';
   tiles.forEach((lamp,i)=>{lamp.style.background=active&&i%3===0?'#d5ae5b':'';lamp.style.boxShadow=active&&i%3===0?'0 0 8px #d5ae5b':''});
-  status.textContent=active?'ДЕМОНСТРАЦИЯ ИНДИКАЦИИ · ЧАСТЬ ТАБЛО ПОДСВЕЧЕНА':'ДЕМОНСТРАЦИЯ ИНДИКАЦИИ · ШТАТНЫЙ ВИД МАКЕТА';
+  status.textContent=active?'ИНДИКАЦИЯ · ТАБЛО ПОДСВЕЧЕНО':'ИНДИКАЦИЯ · ОСНОВНОЙ ВИД';
   addLog(status.textContent);
  }else{
   const [message,target]=messages[action]||['КОМАНДА ИНТЕРФЕЙСА',null];
@@ -318,12 +365,51 @@ document.querySelectorAll('[data-console-action]').forEach(button=>button.addEve
  }
 }));
 
-el('accept').onclick=()=>{if(accepted){addLog('Повторная отметка: смена уже принята.');return}accepted=true;el('shiftstate').textContent='Учебная смена принята. Выполнено ознакомление с журналом.';addLog('Учебная смена принята.')};
-el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ УЧЕБНОЕ СООБЩЕНИЕ: ознакомьтесь с записью.');if(window.BSHUAudio)window.BSHUAudio.info()};
-el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых учебных сообщений для квитирования.');return}activeMessage=false;el('alarms').textContent='00';addLog('Учебное сообщение отмечено оператором.')};
+el('accept').onclick=()=>{if(accepted){addLog('Повторная отметка: смена уже принята.');return}accepted=true;el('shiftstate').textContent='Дежурство принято. Выполнено ознакомление с журналом.';addLog('Дежурство принято.')};
+el('message').onclick=()=>{activeMessage=true;el('alarms').textContent='01';addLog('ИНФОРМАЦИОННОЕ СООБЩЕНИЕ: поступила новая запись.');if(window.BSHUAudio)window.BSHUAudio.info()};
+el('ack').onclick=()=>{if(!activeMessage){addLog('Нет новых сообщений для квитирования.');return}activeMessage=false;el('alarms').textContent='00';addLog('Новое сообщение отмечено оператором.')};
 el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('ЗАПИСЬ ОПЕРАТОРА: '+t);el('note').value=''};
 
-/* Учебная приборная панель: независимые визуальные индикаторы без модели реактора. */
+
+/* Журнал сеанса ЦВМ СКАЛА */
+(()=>{
+ const $=id=>document.getElementById(id);
+ const term=$("skalaTerminal");
+ if(!term)return;
+ const stamp=()=>{const t=$("clock")?.textContent||"08:00:00";$("skalaClock").textContent=t;return t};
+ function line(message){
+  const row=document.createElement("div"),time=document.createElement("span");
+  time.textContent=stamp();row.append(time,document.createTextNode(message));term.append(row);term.scrollTop=term.scrollHeight;
+  if(typeof addLog==="function")addLog("СКАЛА: "+message);
+ }
+ $("skalaSummary").addEventListener("click",()=>{
+  line("сводка состояния запрошена оператором.");
+  line("вычислительный комплекс — готов; информационный обмен — установлен; архив — доступен.");
+  $("skalaFoot").textContent="СКАЛА · СВОДКА СОСТОЯНИЯ ВЫВЕДЕНА";
+  if(window.BSHUAudio)window.BSHUAudio.info();
+ });
+ $("skalaCheck").addEventListener("click",()=>{
+  $("skalaCpu").textContent="КОНТРОЛЬ";$("skalaExchange").textContent="КОНТРОЛЬ";
+  line("выполнен контроль экранной индикации.");
+  line("результат проверки отображения: завершено.");
+  $("skalaFoot").textContent="СКАЛА · КОНТРОЛЬ ИНДИКАЦИИ ЗАВЕРШЁН";
+  if(window.BSHUAudio)window.BSHUAudio.info();
+ });
+ $("skalaMessages").addEventListener("click",()=>{
+  line("открыт архив информационных сообщений.");
+  line("новых записей в архиве нет.");
+  $("skalaFoot").textContent="СКАЛА · АРХИВ СООБЩЕНИЙ ОТКРЫТ";
+  if(window.BSHUAudio)window.BSHUAudio.click();
+ });
+ $("skalaAck").addEventListener("click",()=>{
+  line("оператор подтвердил ознакомление с текущим сообщением.");
+  $("skalaFoot").textContent="СКАЛА · ПОДТВЕРЖДЕНИЕ ЗАРЕГИСТРИРОВАНО";
+  if(window.BSHUAudio)window.BSHUAudio.info();
+ });
+ const clock=$("clock");if(clock)new MutationObserver(stamp).observe(clock,{childList:true,characterData:true,subtree:true});
+})();
+
+/* оперативн приборная панель: независимые визуальные индикаторы без модели реактора. */
 (()=>{
  const $=id=>document.getElementById(id);
  const clamp=n=>Math.max(0,Math.min(100,Number(n)||0));
@@ -339,24 +425,24 @@ el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('З�
    const value=clamp(input.value);
    $("groupVal"+key).textContent=Math.round(value)+"%";
    $("groupFill"+key).style.width=value+"%";
-   $("simStatus").textContent="ИЗМЕНЁН УКАЗАТЕЛЬ ГРУППЫ "+key+" · ТОЛЬКО ГРАФИЧЕСКИЙ МАКЕТ";
+   $("simStatus").textContent="ИЗМЕНЕНО ПОЛОЖЕНИЕ УКАЗАТЕЛЯ ГРУППЫ "+key+"";
   };
   input.addEventListener("input",update);
  });
  $("simLampTest")?.addEventListener("click",()=>{
   document.querySelectorAll("#viurSim .sim-readout").forEach((x,i)=>x.style.borderColor=i%2?"#b99a5b":"#a7cf91");
   $("simReadA").textContent="ТЕСТ";$("simReadB").textContent="ТЕСТ";
-  $("simStatus").textContent="ПРОВЕРКА ЛАМП ВЫПОЛНЕНА · УЧЕБНАЯ ИНДИКАЦИЯ";
+  $("simStatus").textContent="КОНТРОЛЬ ЛАМП ВЫПОЛНЕН";
   if(window.BSHUAudio)window.BSHUAudio.info();
-  addLog("ВИУР: выполнена проверка учебной индикации.");
+  addLog("ВИУР: выполнен контроль ламп.");
  });
  $("simReset")?.addEventListener("click",()=>{
   document.querySelectorAll("[data-sim-group]").forEach(input=>{input.value=50;input.dispatchEvent(new Event("input"))});
   [52,67,43].forEach((v,i)=>gauge(v,i+1));
   $("simReadA").textContent="СТАБИЛЕН";$("simReadB").textContent="СТАБИЛЕН";
   document.querySelectorAll("#viurSim .sim-readout").forEach(x=>x.style.borderColor="");
-  $("simStatus").textContent="МАКЕТ СБРОШЕН · ВСЕ ПОКАЗАНИЯ УСЛОВНЫЕ";
-  addLog("ВИУР: демонстрационная панель возвращена к исходным значениям.");
+  $("simStatus").textContent="ПОКАЗАНИЯ ВОЗВРАЩЕНЫ К ИСХОДНЫМ";
+  addLog("ВИУР: показания возвращены к исходным значениям.");
  });
 })();
 
@@ -462,16 +548,16 @@ el('save').onclick=()=>{const t=el('note').value.trim();if(!t)return;addLog('З�
  }
  function info(){
   if(!ensure())return;ctx.resume();
-  // Короткий мягкий двухтональный звонок учебного уведомления.
+  // Короткий мягкий двухтональный звонок оперативн уведомления.
   transient(740,.16,.10,"sine");transient(988,.2,.085,"sine",sigBus,.13);
  }
  function warning(){
   if(!ensure())return;ctx.resume();
-  // Низкий прерывистый зуммер, условный, не копия штатного сигнала.
+  // Низкий прерывистый зуммер, расчётн, не копия штатного сигнала.
   for(let i=0;i<3;i++){transient(430,.19,.12,"square",sigBus,i*.31);transient(215,.19,.045,"sawtooth",sigBus,i*.31);}
  }
  function alarm(){
-  if(!ensure())return;ctx.resume();stopAlarm();alarmActive=true;state("Демонстрационный сигнал активен","alert");
+  if(!ensure())return;ctx.resume();stopAlarm();alarmActive=true;state("служебн сигнал активен","alert");
   let phase=0;
   const pulse=()=>{
    if(!alarmActive)return;
